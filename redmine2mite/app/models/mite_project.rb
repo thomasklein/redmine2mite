@@ -1,0 +1,2 @@
+class MiteProject < MiteRsrc
+end

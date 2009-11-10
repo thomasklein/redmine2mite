@@ -1,0 +1,46 @@
+"_mite_":http://mite.yo.lk/en is a sleek time tracking tool for teams and freelancers.
+
+<code>Redmine2mite</code> connects your Redmine account with your _mite_.account. Track your time easily on issues within Redmine and get them automatically send to _mite_.
+
+Projects from Redmine can be bundled with _mite_.projects. Furthermore, you can specify which _mite_.services should be available in Redmine on a per-project basis.
+
+h2. Requirements
+
+* "Redmine":http://www.redmine.org/ >= 0.8
+* "Ruby on Rails":rubyonrails.org >= 2.1.2
+* a _mite_.account (you can easily signup for a "free 30 days trial account":https://signup.mite.yo.lk/signup/en )
+
+h2. Installation
+
+# Move the <code>redmine2mite</code> directory into the <code>/vendor/plugins</code> directory of your Redmine installation
+# Install the plugin schema by calling <code>rake db:migrate_plugins</code> via console
+# Restart your Redmine web server (e.g. Mongrel, Thin, WEBrick) 
+# Voilá!
+
+h2. Setup
+
+Login to Redmine. You should now see on the top right corner the link "mite". Click on it. 
+
+After providing your account data you can now interconnect your _mite_.projects and _mite_.services with a specific Redmine project. The selected values will appear on top of the list, if you create a new time entry in the respective project.
+
+Precondition is having Redmine projects assigned to your user, of course :-)
+
+h2. Usage
+
+Once the connection to your _mite_.account was verified, sending your time entries to _mite_ is very easy. The two fields _mite_.project and _mite_.service have been added to the time logging mask. When creating or updating a time entry the plugin sends those values to your _mite_.account.
+
+h2. Known issues
+
+h3. How do i uninstall the plugin?
+
+Well, currently "there is no easy way doing this":http://www.redmine.org/boards/2/topics/2820. 
+* remove the directory <code>redmine2mite</code> out of the <code>/vendor/plugins</code> directory. 
+* manually delete all of the plugins database tables and newly added fields to existing tables
+** tables: <code>mite_bindings</code>, <code>mite_rsrcs</code>
+** added fields in table <code>user_preferences</code>: <code>mite_account_name</code>, <code>mite_api_key</code>, <code>mite_note_pattern</code>, <code>mite_connection_updated_on</code>
+** added fields in table <code>time_entries</code>: <code>mite_time_entry_id</code>, <code>mite_project_id</code>, <code>mite_service_id</code>, <code>mite_time_entry_updated_on</code>
+* entry "redmine_mite" in table <code>plugin_schema_info</code>
+
+h2. License
+
+<code>Redmine2mite</code> is licensed under the terms of the MIT License, see the included MIT-LICENSE file.

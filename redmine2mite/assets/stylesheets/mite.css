@@ -1,0 +1,163 @@
+/* @group Plugin config */
+
+#plugin_mite_config {
+	width:500px;
+	margin: 1em auto;
+	border: 1px solid #aaa;
+	padding: 0.5em;
+	background:#F6F6F6;
+}
+
+#plugin_mite_config label {
+	display: block;
+	font-weight: bold;
+	margin: 0.7em 0 0.25em 0;
+}
+
+#plugin_mite_config h2 {
+	font-size: 12pt;
+	background: #8BBBE5;
+	color: white;
+	padding: 0.25em;
+	margin: 0;
+}
+
+#plugin_mite_config fieldset {
+	margin-top: 20px;	
+}
+
+#plugin_mite_config fieldset legend {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+div.plugin_mite_connection_active {
+	background: url(../images/mite-logo-active.png) no-repeat right bottom;
+}
+
+div.plugin_mite_connection_inactive {
+	background: url(../images/mite-logo-inactive.png) no-repeat right bottom;
+}
+
+div.plugin_mite_connection_status_msg {
+	padding: .3em;
+	margin: 0.5em 0;
+	font-size: 90%;
+}
+
+div.plugin_mite_connection_active div.plugin_mite_connection_status_msg {
+	border: 1px solid #C6D880;
+	background: #E6EFC2;
+	color: #529214;
+}
+
+div.plugin_mite_connection_inactive div.plugin_mite_connection_status_msg {
+	background: #FBE3E4;
+	color: #D12F19;
+	border: 1px solid #FBC2C4;
+}
+
+div.plugin_mite_connection_status_msg small {
+	font-size: 90%;
+}
+
+.formularButtons {
+	margin: 1.5em 0 0.5em 0;
+	padding: 0;
+}
+
+.formularButtons .buttonsLeft {
+	float: left;
+	padding: 0;
+
+}
+
+.formularButtons .buttonsRight {
+	float: right;
+	padding: 0;
+
+}
+
+.formularButtons .clearBoth {
+	clear: both;
+}
+
+input.plugin_mite_account_name {
+	width: 135px;
+}
+
+input.plugin_mite_api_key {
+	width: 255px;
+}
+
+.plugin_mite_link_change_value {
+	float: right;
+	margin-right: 14em;
+}
+
+p.plugin_mite_preferences_help {
+	color: #888888;
+	line-height: 150%;
+	margin: 0 0 0.5em 0;
+}
+
+input.plugin_mite_note_pattern {
+	width: 95%;
+}
+
+#plugin_mite_config .readonly {
+	color: #666;
+}
+
+div.plugin_mite_loading_notifier {
+	background: url(../images/indicator.gif) no-repeat left center;
+	margin: 0 auto;
+	padding-left: 12px;
+	width: 12px;
+	color: transparent;
+	display: none;
+}
+
+
+/* @end */
+
+/* @group Fancy links */
+
+a.plugin_mite_link_change_value, a.plugin_mite_link_change_value:active {
+	color: #5e7edb;
+	padding: 0.25em;
+	text-decoration: none;
+}
+
+a.plugin_mite_link_change_value:hover {
+	-moz-border-radius:5px;
+	-khtml-border-radius:5px;
+	text-shadow: 0 1px 1px #E6D0C9;
+	background-color: #5e7edb;
+	color: white !important;
+	cursor: pointer;
+}
+
+/* @end */
+
+/* @group no javascript */
+
+.plugin_mite_text_if_no_javascript {
+	background: #FBE3E4;
+	color: #D12F19;
+	border: 1px solid #FBC2C4;
+	padding: 0.3em;
+	font-weight: normal;
+	font-size: 90%;
+	width: 200px;
+	margin: 1em auto;
+	
+}
+
+.plugin_mite_hide_if_no_javascript {
+	display: none;
+}
+
+
+/* @end */
+

@@ -1,0 +1,3 @@
+- in /app/controllers/mite_controller.rb: find a cheap way to check for each time entry made in Redmine if it still exists in mite
+- in /app/helpers/mite_helper.rb: TODO: improve readability of code
+- /lib/time_entry_patch.rb: implement observer to get logic out of model

@@ -1,0 +1,2 @@
+class MiteService < MiteRsrc
+end

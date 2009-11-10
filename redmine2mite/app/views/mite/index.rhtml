@@ -1,0 +1,135 @@
+<div id="plugin_mite_config">
+
+<!-- USER ACCOUNT SETTINGS -->
+
+<h2><%= l(:header_plugin_preferences) %></h2>
+
+<% form_for(:mite, @user_preferences, :url => { :action => 'process_account_form' }) do |f| %>
+
+<%  
+	link_change_account_name = link_change_api_key = mite_connection_status_start = field_mite_account_name = field_mite_api_key = ''
+	mite_connection_status_end = "</div><!--plugin_mite_connection_-->"
+	
+# ACTIVE connection
+	if @last_updated
+		mite_connection_status_start = "<div class='plugin_mite_connection_active'><div class='plugin_mite_connection_status_msg'>#{l(:connection_verified,@last_updated)}</div>"
+		
+		link_change_api_key = link_to_function(l(:link_change_value), :class => 'plugin_mite_link_change_value') do |page|
+			page[:mite_mite_api_key].writeAttribute("readonly",false)
+			page[:mite_mite_api_key].removeClassName("readonly")
+			page[:mite_mite_api_key].clear()
+			page[:mite_mite_api_key].focus()
+		end
+		
+		field_mite_account_name = "http:// "+ f.text_field(:mite_account_name, :class => 'plugin_mite_account_name readonly', :readonly => 'readonly') + ".mite.yo.lk"
+		field_mite_api_key = f.password_field(:mite_api_key, :class => 'plugin_mite_api_key readonly', :readonly => "readonly")
+
+# INACTIVE connection
+	else
+		mite_connection_status_start = "<div class='plugin_mite_connection_inactive'><div class='plugin_mite_connection_status_msg'>#{l(:connection_unverified)}</div>"
+		
+		field_mite_account_name = "http:// "+ f.text_field(:mite_account_name, :class => 'plugin_mite_account_name') + ".mite.yo.lk"
+		field_mite_api_key = f.password_field(:mite_api_key, :class => 'plugin_mite_api_key')
+	end
+%>
+
+	<%= mite_connection_status_start %>
+	
+	<%= f.label(:mite_account_name, l(:label_login)) + field_mite_account_name %>
+	
+    <%= f.label(:mite_api_key, l(:label_api_key)) + field_mite_api_key + link_change_api_key %>
+	
+	<%= mite_connection_status_end %>
+	
+	<div class="formularButtons">
+		<div class="buttonsRight">
+			<%= submit_tag l('check_account_data'), :name => "check_account_data", :id => 'check_account_data', :onclick => "
+			$(this).writeAttribute('disabled','disabled').setStyle({cursor: 'wait'});
+			if ($('disconnect_account_data')) {
+				$('disconnect_account_data').writeAttribute('disabled','disabled').setStyle({cursor: 'wait'});
+			}
+			$('mite_plugin_notifier_account_data').setStyle({display: 'block'});
+			$('mite_account_data_button_pressed').writeAttribute('value','check_account_data');" %>
+		</div>
+		<div class="buttonsLeft">
+			<% if User.current.preference[:mite_connection_updated_on] %>
+				<%= submit_tag l('disconnect_account_data'), :name => 'disconnect_account_data', :id => 'disconnect_account_data', :onclick => "
+				if (confirm('#{l(:msg_confirm_disconnecting_account)}')) {
+					$(this).writeAttribute('disabled','disabled').setStyle({cursor: 'wait'});
+					$('check_account_data').writeAttribute('disabled','disabled').setStyle({cursor: 'wait'}); 
+					$('mite_plugin_notifier_account_data').setStyle({display: 'block', cursor: 'wait'});
+					$('mite_account_data_button_pressed').writeAttribute('value','disconnect_account_data');
+				}
+				else return false;
+				" %>
+			<% end %>
+		</div>
+		<div class="plugin_mite_loading_notifier" id="mite_plugin_notifier_account_data">.</div>
+		<input type='hidden' id='mite_account_data_button_pressed' name="mite_account_data_button_pressed" />
+		
+		<div class="clearBoth"></div>
+	</div><!-- formularButtons-->
+<% end %>
+
+
+<!-- PROJECT BINDINGS -->
+
+<% if @last_updated && !@user_projects.empty? %>
+
+	<div id="plugin_mite_user_bindings">
+		
+	<% form_tag({:action => 'save_preferences'}, :method => "post") do %>
+	
+		<h2><%= l(:header_preferences) %></h2>	
+	
+	<!-- INTERCONNECTIONS -->
+		<label><%= l(:header_interconnections) %></label>
+		<p class="plugin_mite_preferences_help"><%= l(:help_interconnections) %>
+			<ul>
+			<% @user_projects.each do |user_project| %>
+				<li><a href='#project_<%= user_project.id %>'><%= user_project.name %></a></li>
+			<% end %>
+			</ul>
+		</p>
+	
+		<% @user_projects.each do |user_project| %>
+			<a name='project_<%= user_project.id %>'></a>
+			<fieldset><legend><%= user_project.name %></legend>
+			
+				<%= simple_select_with_label(l(:label_assignment_mite_project), "bindings[#{user_project.id}][]", @user_mite_projects, @bindings_per_project[user_project.id], {:prompt => l('none1_option_select_box')}) %>
+		
+				<%= simple_select_with_label(l(:label_assignment_mite_services), "bindings[#{user_project.id}][]", @user_mite_services, @bindings_per_project[user_project.id], {}, {:size => @user_mite_services.size, :multiple => "multiple"}) %>
+			
+			</fieldset>	
+	
+		<% end %>
+		
+	<!-- NOTE PATTERN -->
+		<label for="user_preferences_mite_note_pattern"><%= l(:header_note_pattern) %></label>
+		<p class="plugin_mite_preferences_help"><%= l(:help_note_pattern) %></p>
+		<%= text_field :user_preferences, :mite_note_pattern, :class => "plugin_mite_note_pattern" %>
+
+		
+		<div class="formularButtons">
+			<div class="buttonsRight">
+				<%= submit_tag l('save_bindings'), :onclick => "$(this).writeAttribute('disabled','disabled'); $('mite_plugin_notifier_preferences').setStyle({display: 'block'});" %>
+			</div>
+			<div class="buttonsLeft">
+				<input type="reset" value="<%= l(:reset_form) %>" />
+			</div>
+			<div class="plugin_mite_loading_notifier" id="mite_plugin_notifier_preferences">.</div>
+			<div class="clearBoth"></div>
+		</div><!-- formularButtons-->
+	<% end %>
+
+	</div><!--plugin_mite_user_bindings -->
+
+<% end %>
+
+</div><!--plugin_mite_config -->
+
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'mite', :plugin => 'redmine2mite' %>
+<% end %>
+
+<% html_title(l(:plugin_user_preferences_title)) -%>
