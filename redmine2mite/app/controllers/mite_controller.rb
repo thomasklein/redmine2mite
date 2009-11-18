@@ -17,7 +17,7 @@ class MiteController < ApplicationController
     #sm.synchronize
     
     @user_preferences = User.current.preference # im view direkt aufrufen
-    @user_projects = User.current.projects.find(:all, :select => 'id,name', :include => :mite_bindings, :order => "name")
+    @user_projects = User.current.projects.find(:all, :select => 'projects.id,name', :include => :mite_bindings, :order => "name")
     @user_mite_projects = User.current.mite_projects.find(:all,:select => 'id,mite_rsrc_name', :order => "mite_rsrc_name").collect {|mite_project| [mite_project.id, mite_project.mite_rsrc_name]}
     @user_mite_services = User.current.mite_services.find(:all,:select => 'id,mite_rsrc_name', :order => "mite_rsrc_name").collect {|mite_service| [mite_service.id, mite_service.mite_rsrc_name]}
     @bindings_per_project = {}
