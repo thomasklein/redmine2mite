@@ -10,12 +10,6 @@ class MiteController < ApplicationController
 
   def index
     
-    #Mite.account = User.current.preference.mite_account_name
-    #Mite.key = User.current.preference.mite_api_key
-    
-    #sm = SynchronizeMiteProject.new
-    #sm.synchronize
-    
     @user_preferences = User.current.preference # im view direkt aufrufen
     @user_projects = User.current.projects.find(:all, :select => 'projects.id,name', :include => :mite_bindings, :order => "name")
     @user_mite_projects = User.current.mite_projects.find(:all,:select => 'id,mite_rsrc_name', :order => "mite_rsrc_name").collect {|mite_project| [mite_project.id, mite_project.mite_rsrc_name]}
@@ -95,14 +89,18 @@ class MiteController < ApplicationController
             
           # UPDATE project in Redmine
           #####################
-            existingProjectR.update_attributes(:mite_rsrc_name => projectM.name_with_customer,
+            rsrc_name = projectM.name
+            rsrc_name += " (" + projectM.customer_name + ")" if projectM.respond_to?("customer_name")
+            
+            existingProjectR.update_attributes(:mite_rsrc_name => rsrc_name,
                                                :mite_rsrc_updated_at => projectM.updated_at.localtime)
             
         # CREATE image of the mite project in Redmine
         #####################
           else
             newProjectR = MiteProject.new do |p|
-              p.mite_rsrc_name = projectM.name_with_customer
+              p.mite_rsrc_name = projectM.name
+              p.mite_rsrc_name += " (" + projectM.customer_name + ")" if projectM.respond_to?("customer_name")
               p.mite_rsrc_id = projectM.id
               p.mite_rsrc_updated_at = projectM.updated_at
               p.user_id = User.current.id
