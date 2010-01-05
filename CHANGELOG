@@ -1,1 +1,5 @@
+== Redmine2mite v1.1
+* added support for Rails "i18n module" which is required in Redmine >= 0.9
 
+== Redmine2mite v1.0
+* initial release

@@ -12,7 +12,7 @@
 	
 # ACTIVE connection
 	if @last_updated
-		mite_connection_status_start = "<div class='plugin_mite_connection_active'><div class='plugin_mite_connection_status_msg'>#{l(:connection_verified,@last_updated)}</div>"
+		mite_connection_status_start = "<div class='plugin_mite_connection_active'><div class='plugin_mite_connection_status_msg'>#{l(:connection_verified,:date => @last_updated)}</div>"
 		
 		link_change_api_key = link_to_function(l(:link_change_value), :class => 'plugin_mite_link_change_value') do |page|
 			page[:mite_mite_api_key].writeAttribute("readonly",false)

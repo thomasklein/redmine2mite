@@ -95,7 +95,7 @@ module TimeEntryPatch
         
         rescue ActiveResource::UnauthorizedAccess # in case the given account params are not valid
           
-          errors.add_to_base(l("msg_error_verification",url_for(:controller => 'mite', :only_path => true))) # add error message
+          errors.add_to_base(l("msg_error_verification",:url => url_for(:controller => 'mite', :only_path => true))) # add error message
           return false # prevent creating a new time entry record
           
         rescue StandardError => exception # show unforeseen exceptions in the console

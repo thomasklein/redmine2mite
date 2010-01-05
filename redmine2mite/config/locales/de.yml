@@ -1,0 +1,53 @@
+de:
+    ########################
+# ACTION-BASED MESSAGES 
+########################
+    msg_success_saving_bindings: "Deine Präferenzen wurden gespeichert."
+    msg_error_saving_bindings: "Deine Präferenzen konnten nicht gespeichert werden."
+    msg_success_verification: "Die Verbindung zu deinem <em>mite</em>.konto steht!<br /> Deine Projekte und Leistungen wurden erfolgreich aus <em>mite</em> importiert."
+    msg_success_updating_account_data: "Deine Daten wurden aktualisiert."
+    msg_error_updating_account_data: "Deine Daten konnten nicht aktualisiert werden."
+    msg_error_verification: "Mit deinem <em>mite</em> account konnte keine Verbindung hergestellt wurden. Bitte überprüfe noch einmal  <a href='{{url}}'>deine Account-Daten</a>."
+    msg_missing_account_data: "Du hast vergessen deine Kontodaten anzugeben."
+    msg_invalid_account_name: "Dein Login ist nicht korrekt."
+    msg_invalid_api_key: "Dein API-Schlüssel ist nicht korrekt."
+    msg_error_disconnecting_account: "Konnte die Verbindung zu deinem <em>mite</em>.konto nicht lösen."
+    msg_confirm_disconnecting_account: "Bist du dir sicher die Verbindung zu deinem mite.konto zu lösen? Zeiteinräge in mite und Redmine werden danach immer noch verfügbar sein. Aus Redmine gelöscht werden deine:\\n- mite-Nutzerdaten\\n- aus mite importierten Projekte und Leistungen\\n- Verbindungen zwischen  mite- und Redmine-Daten"
+    msg_success_disconnecting_account: "Die Verbindung zu deinem <em>mite</em>.konto wurde gelöst."
+#################
+# STATIC TEXTS
+#################
+    # user account
+    header_plugin_preferences: "Verbindung zu deinem <em>mite</em>.account"
+    connection_verified: "<strong>Status:</strong> Verbindung aktiv (Letztes Update <small>{{date}}</small>)"
+    connection_unverified: "<strong>Status:</strong> Nicht verbunden"
+    header_preferences: "Präferenzen"
+    header_note_pattern: "Kommentare zu Zeiteinträgen"
+    help_note_pattern: "Du kannst hier einen Text definieren, der bei jedem Zeiteintrag als zusätzliche Bemerkung an <em>mite</em> mitgesendet wird. Für dynamische Informationen können die folgenden Platzhalter verwendet werden:<br /><code>{comment}, {issue_id}, {issue}, {issue_tracker}, {issue_category}, {project_id}, {project}, {user_id}, {user}</code>.<br />Wenn du nicht {comment} nutzt, welches den den Redmine-Kommentar beinhaltet, wird der angegebene Text an den eigentlichen Redmine-Kommentar angehängt."
+    header_interconnections: "Bindungen"
+    help_interconnections: "Ausgewählte <em>mite</em>.projekte / <em>mite</em>.leistungen werden an den Anfang der Auswahllisten für einen neuen Zeiteintrag gestellt. Du kannst auch mehrere Leistungen auswählen, indem du beim Klicken die Strg-Taste (Windows) bzw. Apfel-Tast (Mac) gedrückt hältst.<br /><br /> Sprungmarken zu deinen Redmine-Projekten:"
+    plugin_user_preferences_title: "Redmine2mite Nutzereinstellungen"
+
+#################
+# LABELS, BUTTONS AND LINKS
+#################
+    # user account
+    label_login: "Login"
+    label_api_key: "API-Schlüssel"
+    label_assignment_mite_project: "<em>mite</em>.projekt"
+    label_assignment_mite_services: "<em>mite</em>.leistungen"
+    check_account_data: "Daten prüfen und synchronisieren"
+    check_account_data_active: "Daten prüfen und synchronisieren..."
+    save_bindings: "Präferenzen speichern"
+    save_bindings_active: "Präferenzen speichern..."
+    disconnect_account_data: "Verbindung lösen"
+    disconnecting_account_data_active: "Verbindung lösen..."
+    link_change_value: "Ändern"
+    # time entries
+    label_option_group_other_services: "andere Leistungen"
+    label_mite_project: "<em>mite</em>.projekt"
+    label_mite_service: "<em>mite</em>.leistung"
+    # other
+    none1_option_select_box: "…"
+    none2_option_select_box: "…"
+    reset_form: "Zurücksetzen"
