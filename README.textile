@@ -6,9 +6,11 @@ Projects from Redmine can be bundled with _mite_.projects. Furthermore, you can 
 
 h2. Requirements
 
-* "Redmine":http://www.redmine.org/ >= 0.8
-* "Ruby on Rails":rubyonrails.org >= 2.1.2
+* "Redmine":http://www.redmine.org/ >= 0.9
+* "Ruby on Rails":rubyonrails.org >= 2.3
 * a _mite_.account (you can easily signup for a "free 30 days trial account":https://signup.mite.yo.lk/signup/en )
+
+*Please note:* For Redmine versions prior to 0.9 use the plugin "version 1.0":http://github.com/thomasklein/Redmine2mite/tree/v1.0. 
 
 h2. Installation
 

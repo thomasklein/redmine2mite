@@ -6,9 +6,11 @@ Projekte in Redmine können _mite_.projekten zugeordnet werden. Zudem lässt sic
 
 h2. Anforderungen
 
-* "Redmine":http://www.redmine.org/ >= 0.8
-* "Ruby on Rails":rubyonrails.org >= 2.1.2
+* "Redmine":http://www.redmine.org/ >= 0.9
+* "Ruby on Rails":rubyonrails.org >= 2.3
 * ein _mite_.account ("30 Tage kann kostenfrei getestet werden":https://signup.mite.yo.lk/signup/de)
+
+*Hinweis:* Für ältere Redmine-Versionen bitte die "Version 1.0":http://github.com/thomasklein/Redmine2mite/tree/v1.0 des Plugins verwenden.
 
 h2. Installation
 
