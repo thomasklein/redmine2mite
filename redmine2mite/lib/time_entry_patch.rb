@@ -16,9 +16,9 @@ module TimeEntryPatch
       # new callback: send time entry to mite after it was saved in redmine
       # but ONLY IF he already connected his mite account with redmine
       # mte prefix = mite time entry
-        before_create  :mte_prepare_creation, :if => :mite_account_connected?
-        before_update  :mte_prepare_updating, :if => :mite_account_connected?
-        before_destroy :mte_prepare_destroying, :if => :mite_account_connected?
+        before_create  :mte_prepare_creation, :if => :mite_conditions_apply?
+        before_update  :mte_prepare_updating, :if => :mite_conditions_apply?
+        before_destroy :mte_prepare_destroying, :if => :mite_conditions_apply?
         
         named_scope :connected_to_mite, :conditions => ["mite_time_entry_id IS NOT NULL"]
       end
@@ -27,20 +27,18 @@ module TimeEntryPatch
     module InstanceMethods
   
     private
-      def mite_account_connected?; User.current.preference["mite_connection_updated_on"]; end
+      def mite_conditions_apply?
+        User.current.preference["mite_connection_updated_on"] && self[:mite_project_id]
+      end
   
     private
       def mte_prepare_creation; send_request_to_mite("create"); end
       
+    # NOTE: only send a request to mite if the user account is still connected
+    # this is not the case if the mite-fields of the time entry 
+    # should be nullified when the user disconnects his mite-account from Redmine  
     private
-      def mte_prepare_updating
-        
-      # NOTE: only send a request to mite if the user account is still connected
-      # this is not the case if the mite-fields of the time entry 
-      # should be nullified when the user disconnects his mite-account from Redmine
-        send_request_to_mite("update") if User.current.preference[:mite_connection_updated_on]
-        
-      end
+      def mte_prepare_updating; send_request_to_mite("update"); end
       
     private
       def mte_prepare_destroying; send_request_to_mite("destroy"); end  
@@ -72,8 +70,7 @@ module TimeEntryPatch
           
           # handle possible cases
           if type == "create" || (type == "update" && !mte_exists)
-            mte = Mite::TimeEntry.create(:service_id => self[:mite_service_id], :project_id => self[:mite_project_id],  :minutes => (self[:hours] * 60), :note => comment)
-
+            mte = Mite::TimeEntry.create(:service_id => self[:mite_service_id], :project_id => self[:mite_project_id],  :minutes => (self[:hours] * 60), :date_at => self[:spent_on], :note => comment)
             self[:mite_time_entry_id] = mte.attributes["id"]
             self[:mite_time_entry_updated_on ] = mte.attributes["updated_at"]
             
@@ -82,6 +79,7 @@ module TimeEntryPatch
             mte.project_id = self[:mite_project_id]
             mte.service_id = self[:mite_service_id]
             mte.note = comment
+            mte.date_at = self[:spent_on]
             mte.minutes = (self[:hours] * 60)
             mte.save # sends updated attributes to mite
             mte.reload # to get new attribute 'updated_at'

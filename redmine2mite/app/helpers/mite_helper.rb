@@ -13,7 +13,7 @@ module MiteHelper
   # display only the name of the resource as simple text since there's nothing to choose from
     if options[:has_at_most_one_binding] && collection[:binded_rsrces].size == 1
     
-      return "<input type='hidden' name='#{namespace}[#{field_name}]' value='#{collection[:binded_rsrces][0][0]}'/> #{collection[:binded_rsrces][0][1]}"
+      return "<input type='hidden' name='#{namespace}[#{field_name}]' value='#{collection[:binded_rsrces][0][0]}' id='#{namespace}_#{field_name}' /> #{collection[:binded_rsrces][0][1]}"
     end
       
     

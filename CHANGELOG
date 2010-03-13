@@ -1,3 +1,7 @@
+== Redmine2mite v1.1.2
+* Bugfix - time entry date wasn't recognized properly
+* New Feature: added a checkbox (checked by default) to let the user decide if he wants to send a time entry to mite or not
+
 == Redmine2mite v1.1.1
 * fixed a bug in Safari and other WebKit-Browsers where buttons would not submit the form
 

@@ -54,6 +54,7 @@ en:
     label_option_group_other_services: "other services"
     label_mite_project: <em>mite</em>.project
     label_mite_service: <em>mite</em>.service
+    label_option_send_te_to_mite: "Send to <em>mite</em>"
 
     # other
     none1_option_select_box: "…"
