@@ -40,8 +40,8 @@ class MiteController < ApplicationController
 
   
 #########
-# Saves
-#########  
+# Saves account data and performs synchronzation
+#########
   def save_account_data
     
     msg_type = ''
@@ -261,9 +261,10 @@ class MiteController < ApplicationController
       flash[msg_type] = msg
     end
     
-  #########
-  # Save user preferences
-  #########  
+    
+#########
+# Save user preferences
+#########  
     def save_preferences
       
     # update note pattern for time entries  
@@ -275,11 +276,17 @@ class MiteController < ApplicationController
     # process new and deleted bindings  
         if bindings = params[:bindings]
         
-          bindings.each do |project_id,mite_rsrc_ids|
+          bindings.each do |project_id,mite_rsrc_ids| 
+            
+          # delete old hash value, since it works with escaped strings   
+            bindings.delete(project_id)
           
           # convert all id values to type Fixnum since they are sendt as strings
-            mite_rsrc_ids = mite_rsrc_ids.collect{|rsrc_id| rsrc_id.to_i}.select{|rsrc_id| rsrc_id != 0}
+            mite_rsrc_ids = mite_rsrc_ids.collect{|rsrc_id| rsrc_id.to_i}
             project_id = project_id.to_i
+          
+          # reassing converted values to hash
+            bindings[project_id] = mite_rsrc_ids
           
           #####################
           # DELETE OLD BINDINGS
@@ -298,6 +305,13 @@ class MiteController < ApplicationController
             
               MiteBinding.create(:project_id => project_id, :user_id => User.current.id, :mite_rsrc_id => mite_rsrc_id) unless MiteBinding.find(:first,:conditions => {:user_id => User.current.id, :mite_rsrc_id => mite_rsrc_id, :project_id => project_id})
             end  
+          end
+        end
+        
+      # DELETE BINDINGS FROM DESELCTED PROJECTS
+        if User.current.mite_bindings.size > 0
+          User.current.mite_bindings.each do |binding|
+            binding.destroy if not bindings or not bindings.has_key?(binding.project_id)
           end
         end
       

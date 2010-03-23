@@ -12,7 +12,7 @@ de:
     msg_invalid_account_name: "Dein Login ist nicht korrekt."
     msg_invalid_api_key: "Dein API-Schlüssel ist nicht korrekt."
     msg_error_disconnecting_account: "Konnte die Verbindung zu deinem <em>mite</em>.konto nicht lösen."
-    msg_confirm_disconnecting_account: "Bist du dir sicher die Verbindung zu deinem mite.konto zu lösen? Zeiteinräge in mite und Redmine werden danach immer noch verfügbar sein. Aus Redmine gelöscht werden deine:\\n- mite-Nutzerdaten\\n- aus mite importierten Projekte und Leistungen\\n- Verbindungen zwischen  mite- und Redmine-Daten"
+    msg_confirm_disconnecting_account: "Bist du dir sicher die Verbindung zu deinem mite.konto zu lösen? Zeiteinräge in mite und Redmine werden danach immer noch verfügbar sein. Aus Redmine gelöscht werden deine:\n- mite-Nutzerdaten\n- aus mite importierten Projekte und Leistungen\n- Verbindungen zwischen  mite- und Redmine-Daten"
     msg_success_disconnecting_account: "Die Verbindung zu deinem <em>mite</em>.konto wurde gelöst."
 #################
 # STATIC TEXTS
@@ -23,16 +23,20 @@ de:
     connection_unverified: "<strong>Status:</strong> Nicht verbunden"
     header_preferences: "Präferenzen"
     header_note_pattern: "Kommentare zu Zeiteinträgen"
+    header_omit_transmission_option: "Hinzufügen einer Option in der Zeiteintragsmaske, den aktuellen Zeiteintrag nicht an <em>mite</em> zu senden"
     help_note_pattern: "Du kannst hier einen Text definieren, der bei jedem Zeiteintrag als zusätzliche Bemerkung an <em>mite</em> mitgesendet wird. Für dynamische Informationen können die folgenden Platzhalter verwendet werden:<br /><code>{comment}, {issue_id}, {issue}, {issue_tracker}, {issue_category}, {project_id}, {project}, {user_id}, {user}</code>.<br />Wenn du nicht {comment} nutzt, welches den den Redmine-Kommentar beinhaltet, wird der angegebene Text an den eigentlichen Redmine-Kommentar angehängt."
     header_interconnections: "Bindungen"
-    help_interconnections: "Ausgewählte <em>mite</em>.projekte / <em>mite</em>.leistungen werden an den Anfang der Auswahllisten für einen neuen Zeiteintrag gestellt. Du kannst auch mehrere Leistungen auswählen, indem du beim Klicken die Strg-Taste (Windows) bzw. Apfel-Tast (Mac) gedrückt hältst.<br /><br /> Sprungmarken zu deinen Redmine-Projekten:"
+    help_interconnections: "Ausgewählte <em>mite</em>.projekte / <em>mite</em>.leistungen werden an den Anfang der Auswahllisten für einen neuen Zeiteintrag gestellt. Du kannst auch mehrere Leistungen auswählen, indem du beim Klicken die Strg-Taste (Windows) bzw. Apfel-Tast (Mac) gedrückt hältst. Wenn du bestimmte Projekte nicht an <em>mite</em> binden möchtest, dann kannst du die Bindung auch deaktivieren. <br /><br />Sprungmarken zu deinen Redmine-Projekten:"
     plugin_user_preferences_title: "Redmine2mite Nutzereinstellungen"
+    title_activate_deactivate_interconnection: "Aktiviere oder deaktiviere die Projektbindung"
+    
 
 #################
 # LABELS, BUTTONS AND LINKS
 #################
     # user account
     label_login: "Login"
+    label_binding_active: "Bindung aktiv"
     label_api_key: "API-Schlüssel"
     label_assignment_mite_project: "<em>mite</em>.projekt"
     label_assignment_mite_services: "<em>mite</em>.leistungen"

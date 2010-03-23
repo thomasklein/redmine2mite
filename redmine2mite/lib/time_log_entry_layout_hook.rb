@@ -4,24 +4,36 @@ class TimeLogEntryLayoutHook < Redmine::Hook::ViewListener
       
     # do nothing if a connection to a mite account was yet not established  
       return unless User.current.preference["mite_connection_updated_on"]
+    
+    # get the first mite binding for this project
+      firstBinding = User.current.mite_bindings.find(:first,:conditions => [ "project_id = ?", context[:time_entry][:project_id]])
+      
+    # return if there's no binding or 
+    # the mite ressource is 0 (no resource bound) or -1 (project binding inactive)
+      return if !firstBinding || firstBinding[:mite_rsrc_id] < 0
       
       te = context[:time_entry]
       
-      onclickAction = '
-        if ($("mite_resources").getStyle("display")=="block") {
-          $("mite_resources").setStyle({display:"none"});
-          $("time_entry_mite_project_id").setAttribute("name","");
-          $("time_entry_mite_service_id").setAttribute("name","");
-        }
-        else {
-          $("mite_resources").setStyle({display:"block"});
-          $("time_entry_mite_project_id").setAttribute("name","time_entry[mite_project_id]");
-          $("time_entry_mite_service_id").setAttribute("name","time_entry[mite_service_id]");
-        }';
+      new_fields = ""
       
-      new_fields = 
-        "<br /><p><label for='time_entry_option_send_te_to_mite'>#{l(:label_option_send_te_to_mite)}</label>" +
-        "<input type='checkbox' id='option_send_te_to_mite' value='1' checked='checked' onclick='#{onclickAction}' /></p>"
+      if User.current.preference.mite_omit_transmission_option
+      
+        onclickAction = '
+          if ($("mite_resources").getStyle("display")=="block") {
+            $("mite_resources").setStyle({display:"none"});
+            $("time_entry_mite_project_id").setAttribute("name","");
+            $("time_entry_mite_service_id").setAttribute("name","");
+          }
+          else {
+            $("mite_resources").setStyle({display:"block"});
+            $("time_entry_mite_project_id").setAttribute("name","time_entry[mite_project_id]");
+            $("time_entry_mite_service_id").setAttribute("name","time_entry[mite_service_id]");
+          }';
+      
+        new_fields = 
+          "<br /><p><label for='time_entry_option_send_te_to_mite'>#{l(:label_option_send_te_to_mite)}</label>" +
+          "<input type='checkbox' id='option_send_te_to_mite' value='1' checked='checked' onclick='#{onclickAction}' /></p>"
+      end
         
       new_fields += "<div id='mite_resources'>"
 

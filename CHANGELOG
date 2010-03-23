@@ -1,3 +1,13 @@
+== Redmine2mite v1.2
+* New feature: Added possibility to exclude projects from binding to mite 
+* CHANGE: Instead of always showing the option for excluding the sending of a time entry to mite, you can now decide for yourself if want this to show up in the user preferences  
+
+Please note: This upgrade includes a database update. So you have to run 
+
+rake db:migrate_plugins
+
+before using this new version.
+
 == Redmine2mite v1.1.2
 * Bugfix - time entry date wasn't recognized properly
 * New Feature: added a checkbox (checked by default) to let the user decide if he wants to send a time entry to mite or not

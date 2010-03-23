@@ -18,8 +18,8 @@ Redmine::Plugin.register :redmine2mite do
   name 'Redmine2mite'
   author 'Yolk – Sebastian Munz & Julia Soergel GbR / Thomas Klein'
   description 'Redmine2mite connects your Redmine account with your mite.account. Track your time easily on issues within Redmine and get them automatically send to mite.'
-  version '0.1'
+  version '1.2'
   
-  requires_redmine :version_or_higher => '0.8.0'
+  requires_redmine :version_or_higher => '0.9.0'
   menu :account_menu, :mite, { :controller => 'mite', :action => 'index' }, :caption => 'mite', :before => :logout, :if => Proc.new{User.current.logged?}
 end

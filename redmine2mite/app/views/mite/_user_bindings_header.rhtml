@@ -1,0 +1,13 @@
+<h2><%= l(:header_preferences) %></h2>
+
+<!-- INTERCONNECTIONS -->
+<label><%= l(:header_interconnections) %></label>
+<p class="plugin_mite_preferences_help"><%= l(:help_interconnections) %>
+	<ul>
+	<% for user_project in user_projects do %>
+		<li>
+			<a href='#project_<%= user_project.id %>'><%= user_project.name %></a>
+		</li>
+	<% end %>
+	</ul>
+</p>
