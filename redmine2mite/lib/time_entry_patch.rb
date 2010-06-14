@@ -49,6 +49,7 @@ module TimeEntryPatch
         
         Mite.account = User.current.preference["mite_account_name"]
         Mite.key = User.current.preference["mite_api_key"]
+        Mite.user_agent = 'Redmine2mite/' + MiteController::REDMINE_2_MITE_VERSION
         mte_exists = false
         
         begin

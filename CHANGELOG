@@ -1,3 +1,6 @@
+== Redmine2mite v1.2.1
+* implemented the current version of "mite-rb" (v0.3) which now sends additionally the name and version of the user agent within every request
+
 == Redmine2mite v1.2
 * New feature: Added possibility to exclude projects from binding to mite 
 * CHANGE: Instead of always showing the option for excluding the sending of a time entry to mite, you can now decide for yourself if want this to show up in the user preferences  

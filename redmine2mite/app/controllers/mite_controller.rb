@@ -7,7 +7,9 @@ class MiteController < ApplicationController
   include MiteHelper
   
   before_filter :require_login
-
+  
+  REDMINE_2_MITE_VERSION = 'v1.2.1'
+  
   def index
     
     @user_preferences = User.current.preference # im view direkt aufrufen
@@ -54,6 +56,7 @@ class MiteController < ApplicationController
     else
       Mite.account = params[:mite]['mite_account_name']
       Mite.key = params[:mite]['mite_api_key']
+      Mite.user_agent = 'Redmine2mite/' + MiteController::REDMINE_2_MITE_VERSION
       
       begin
       # try to validate the connection
