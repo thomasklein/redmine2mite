@@ -41,7 +41,7 @@ Well, currently "there is no easy way doing this":http://www.redmine.org/boards/
 ** tables: <code>mite_bindings</code>, <code>mite_rsrcs</code>
 ** added fields in table <code>user_preferences</code>: <code>mite_account_name</code>, <code>mite_api_key</code>, <code>mite_note_pattern</code>, <code>mite_connection_updated_on</code>
 ** added fields in table <code>time_entries</code>: <code>mite_time_entry_id</code>, <code>mite_project_id</code>, <code>mite_service_id</code>, <code>mite_time_entry_updated_on</code>
-* entry "redmine_mite" in table <code>plugin_schema_info</code>
+* all entries "redmine_mite" in table <code>schema_migrations</code>
 
 h2. License
 

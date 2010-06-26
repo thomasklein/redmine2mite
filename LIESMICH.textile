@@ -41,7 +41,7 @@ Da gibt es "im Moment noch keinen sauberen Weg":http://www.redmine.org/boards/2/
 ** Tabellen: <code>mite_bindings</code>, <code>mite_rsrcs</code>
 ** neue Felder in Tabelle <code>user_preferences</code>: <code>mite_account_name</code>, <code>mite_api_key</code>, <code>mite_note_pattern</code>, <code>mite_connection_updated_on</code>
 ** neue Felder in Tabelle <code>time_entries</code>: <code>mite_time_entry_id</code>, <code>mite_project_id</code>, <code>mite_service_id</code>, <code>mite_time_entry_updated_on</code>
-* Eintrag "redmine_mite" in Tabelle <code>plugin_schema_info</code>
+* alle Einträge "redmine2mite" in Tabelle <code>schema_migrations</code>
 
 h2. Lizenz
 
