@@ -6,6 +6,7 @@ require 'user_patch'
 
 # hooks
 require_dependency 'time_log_entry_layout_hook.rb'
+require_dependency 'issue_details_layout_hook.rb'
 
 # extend the Redmine core
 Dispatcher.to_prepare do
