@@ -1,3 +1,6 @@
+== Redmine2mite v1.3
+* New feature: Time entries connected to mite can be added directly in the Update (issue/<issue-id>) or Create form (issue/new) of an issue.
+
 == Redmine2mite v1.2.1
 * implemented the current version of "mite-rb" (v0.3) which now sends additionally the name and version of the user agent within every request
 
