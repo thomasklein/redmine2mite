@@ -7,7 +7,7 @@ de:
     msg_success_verification: "Die Verbindung zu deinem <em>mite</em>.konto steht!<br /> Deine Projekte und Leistungen wurden erfolgreich aus <em>mite</em> importiert."
     msg_success_updating_account_data: "Deine Daten wurden aktualisiert."
     msg_error_updating_account_data: "Deine Daten konnten nicht aktualisiert werden."
-    msg_error_verification: "Mit deinem <em>mite</em> account konnte keine Verbindung hergestellt wurden. Bitte überprüfe noch einmal  <a href='{{url}}'>deine Account-Daten</a>."
+    msg_error_verification: "Mit deinem <em>mite</em> account konnte keine Verbindung hergestellt wurden. Bitte überprüfe noch einmal  <a href='%{url}'>deine Account-Daten</a>."
     msg_missing_account_data: "Du hast vergessen deine Kontodaten anzugeben."
     msg_invalid_account_name: "Dein Login ist nicht korrekt."
     msg_invalid_api_key: "Dein API-Schlüssel ist nicht korrekt."
@@ -19,7 +19,7 @@ de:
 #################
     # user account
     header_plugin_preferences: "Verbindung zu deinem <em>mite</em>.account"
-    connection_verified: "<strong>Status:</strong> Verbindung aktiv (Letztes Update <small>{{date}}</small>)"
+    connection_verified: "<strong>Status:</strong> Verbindung aktiv (Letztes Update <small>%{date}</small>)"
     connection_unverified: "<strong>Status:</strong> Nicht verbunden"
     header_preferences: "Präferenzen"
     header_note_pattern: "Kommentare zu Zeiteinträgen"

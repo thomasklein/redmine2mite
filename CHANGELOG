@@ -1,3 +1,6 @@
+== Redmine2mite v1.3.1
+* Changed deprecated interpolation syntax in I18n messages to the current version
+
 == Redmine2mite v1.3
 * New feature: Time entries connected to mite can be added directly in the Update (issue/<issue-id>) or Create form (issue/new) of an issue.
 

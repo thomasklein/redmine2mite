@@ -7,7 +7,7 @@ en:
     msg_success_verification: "The connection to your <em>mite</em>.account is now active! All of your projects and services were imported."
     msg_success_updating_account_data: "Your data was updated."
     msg_error_updating_account_data: "Could not update your account data. "	
-    msg_error_verification: "Could not connect to your <em>mite</em> account. Please recheck <a href='{{url}}'>your account data</a>."
+    msg_error_verification: "Could not connect to your <em>mite</em> account. Please recheck <a href='%{url}'>your account data</a>."
     msg_missing_account_data: "You forgot to provide your account data."
     msg_invalid_account_name: "Your login is not valid."
     msg_invalid_api_key: "Your api key seems to be invalid."
@@ -20,7 +20,7 @@ en:
 #################
 # user account
     header_plugin_preferences: "Connection to your <em>mite</em>.account"
-    connection_verified: "<strong>Status:</strong> Connection active (Updated at <small>{{date}}</small>)"
+    connection_verified: "<strong>Status:</strong> Connection active (Updated at <small>%{date}</small>)"
     connection_unverified: "<strong>Status:</strong> Not connected"
     header_omit_transmission_option: "Add option in time entry form to not send the current time entry to <em>mite</em>"
     header_preferences: "Preferences"
