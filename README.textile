@@ -14,7 +14,7 @@ h2. Requirements
 
 h2. Installation
 
-# Move the <code>redmine2mite</code> directory into the <code>/vendor/plugins</code> directory of your Redmine installation
+# Add the repo as a submodule into the <code>/vendor/plugins/redmine2mite</code> directory of your Redmine installation
 # Install the plugin schema by calling <code>rake db:migrate_plugins</code> via console
 # Restart your Redmine web server (e.g. Mongrel, Thin, WEBrick) 
 # Voilá!
