@@ -25,7 +25,7 @@ en:
     header_omit_transmission_option: "Add option in time entry form to not send the current time entry to <em>mite</em>"
     header_preferences: "Preferences"
     header_note_pattern: "Additional infos for a time entry note"
-    help_note_pattern: "You can define additional information sent with each time entry within the comments. For dynamic information you can use the following placeholders:<br /><code>{comment}, {issue_id}, {issue}, {issue_tracker}, {issue_category}, {project_id}, {project}, {user_id}, {user}</code>.<br />If you do not use <code>{comment}</code> (contains the Redmine comment), this text will be appended to the Redmine comment."
+    help_note_pattern: "You can define additional information sent with each time entry within the comments. For dynamic information you can use the following placeholders:<br />{issue_id}, {issue}, {issue_tracker}, {issue_category}, {project_id}, {project}, {user_id}, {user}</code>."
 
     header_interconnections: "Interconnections"
     help_interconnections: "Selected <em>mite</em>.projects / <em>mite</em>.services will be shown on top of the selection lists for a new time entry. You can choose multiple services by clicking with a pressed control key (Windows) or command key (Mac) on several entries in the lists. If you don't want to interconnect certain projects to <em>mite</em> you can also deactivate the interconnection.<br /><br /> Quicklinks to your Redmine projects"

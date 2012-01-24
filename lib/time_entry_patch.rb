@@ -1,5 +1,5 @@
 require_dependency 'time_entry'
-require 'mite-rb' # to coommunicate with the mite api
+require 'mite-rb' # to communicate with the mite api
 include ActionController::UrlWriter # to generate link to mite preferences
 
 # TODO: implement observer to get logic out of model
@@ -110,6 +110,10 @@ module TimeEntryPatch
       
       return comment unless pattern
       
+      # do not add the placeholders if the pattern was already resolved
+      # (marked by "{" and "}") and is part of the comment
+      return comment if comment.include?("{") && comment.include?("}")
+      
       new_comment = pattern
       
       new_comment['{issue_id}']= self.issue_id.to_s if new_comment['{issue_id}']
@@ -121,13 +125,7 @@ module TimeEntryPatch
       new_comment['{user_id}']= self.user_id.to_s if new_comment['{user_id}']
       new_comment['{user}']= "#{self.user.firstname} #{self.user.lastname}" if new_comment['{user}']
       
-      if new_comment['{comment}']
-         new_comment['{comment}']= comment
-      else
-         new_comment = "#{comment} (#{new_comment})"
-      end
-      
-      new_comment
+      "#{comment} {#{new_comment}}"
     end
     
   end

@@ -181,7 +181,7 @@ class MiteController < ApplicationController
       # take care if time entries in mite do not exist anymore  
         rescue ActiveResource::ResourceNotFound
           # no problem with that...
-        end  
+        end
         
       # in case time entries were deleted in mite
       # FIND AND DELETE their images in Redmine
@@ -193,22 +193,25 @@ class MiteController < ApplicationController
         
       # check for updated time entries, if any
         if time_entriesM.any?
-        
+          
         # refine selection by only using those, which were changed since the last synchronization
-          time_entriesM = time_entriesM.select{|timeEntryM| !cUserPref.mite_connection_updated_on || (timeEntryM.updated_at > cUserPref.mite_connection_updated_on)}
-        
+          time_entriesM = time_entriesM.select do |timeEntryM| 
+            !cUserPref.mite_connection_updated_on || 
+            (timeEntryM.updated_at.to_datetime > cUserPref.mite_connection_updated_on.to_datetime)
+          end
+
         # UPDATE TIME ENTRY IMAGES
         #####################
           time_entriesM.each do |teM|
           
             time_entriesR.select{|teR| (teR.mite_time_entry_id == teM.id)}.each do |teR_to_update|
-          
-            teR_to_update.update_attributes(:mite_project_id => teM.project_id,
-                                            :mite_service_id => teM.service_id,
-                                            :hours => (teM.minutes.to_f / 60).to_f,
-                                            :comments => teM.note,
-                                            :mite_time_entry_updated_on => teM.updated_at.localtime)
-            end
+            
+              teR_to_update.update_attributes(:mite_project_id => teM.project_id,
+                                              :mite_service_id => teM.service_id,
+                                              :hours => (teM.minutes.to_f / 60).to_f,
+                                              :comments => teM.note,
+                                              :mite_time_entry_updated_on => teM.updated_at.localtime)
+              end
           end
         end
         
@@ -224,8 +227,7 @@ class MiteController < ApplicationController
         p "*************"
       end
     end
-  
-
+    
   # method defined in MiteHelper  
     fill_flash_msg(msg,msg_type,exception)
   end

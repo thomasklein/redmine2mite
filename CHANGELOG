@@ -1,3 +1,6 @@
+== Redmine2mite v1.3.2
+* Bugfix: Double comment issue resolved (Ticket #11 https://github.com/thomasklein/redmine2mite/issues/11)
+
 == Redmine2mite v1.3.1
 * Changed deprecated interpolation syntax in I18n messages to the current version
 
