@@ -1,3 +1,6 @@
+== Redmine2mite v1.4
+Use current mite-rb version 0.4.1
+
 == Redmine2mite v1.3.2
 * Bugfix: Double comment issue resolved (Ticket #11 https://github.com/thomasklein/redmine2mite/issues/11)
 
