@@ -9,5 +9,4 @@ module ProjectPatch
         has_many :mite_bindings, :dependent => :destroy
       end
   end
-  
 end

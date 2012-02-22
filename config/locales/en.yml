@@ -23,6 +23,7 @@ en:
     connection_verified: "<strong>Status:</strong> Connection active (Updated at <small>%{date}</small>)"
     connection_unverified: "<strong>Status:</strong> Not connected"
     header_omit_transmission_option: "Add option in time entry form to not send the current time entry to <em>mite</em>"
+    header_tracker_option: "Activate tracker functionality, if time entries are booked without effort"
     header_preferences: "Preferences"
     header_note_pattern: "Additional infos for a time entry note"
     help_note_pattern: "You can define additional information sent with each time entry within the comments. For dynamic information you can use the following placeholders:<br />{issue_id}, {issue}, {issue_tracker}, {issue_category}, {project_id}, {project}, {user_id}, {user}</code>."

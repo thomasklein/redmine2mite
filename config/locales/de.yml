@@ -24,6 +24,7 @@ de:
     header_preferences: "Präferenzen"
     header_note_pattern: "Kommentare zu Zeiteinträgen"
     header_omit_transmission_option: "Hinzufügen einer Option in der Zeiteintragsmaske, den aktuellen Zeiteintrag nicht an <em>mite</em> zu senden"
+    header_tracker_option: "Stoppuhr-Funktionalität aktivieren, wenn Zeiteinträge ohne Aufwand gebucht werden"
     help_note_pattern: "Du kannst hier einen Text definieren, der bei jedem Zeiteintrag als zusätzliche Bemerkung (als Teil des Kommentars) an <em>mite</em> mitgesendet wird. Für dynamische Informationen können die folgenden Platzhalter verwendet werden:<br />{issue_id}, {issue}, {issue_tracker}, {issue_category}, {project_id}, {project}, {user_id}, {user}</code>."
     header_interconnections: "Bindungen"
     help_interconnections: "Ausgewählte <em>mite</em>.projekte / <em>mite</em>.leistungen werden an den Anfang der Auswahllisten für einen neuen Zeiteintrag gestellt. Du kannst auch mehrere Leistungen auswählen, indem du beim Klicken die Strg-Taste (Windows) bzw. Apfel-Tast (Mac) gedrückt hältst. Wenn du bestimmte Projekte nicht an <em>mite</em> binden möchtest, dann kannst du die Bindung auch deaktivieren. <br /><br />Sprungmarken zu deinen Redmine-Projekten:"

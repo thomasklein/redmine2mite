@@ -1,3 +1,7 @@
+== Redmine2mite v1.5
+* New feature: Added time tracker functionality
+* Use current mite-rb version 0.4.2
+
 == Redmine2mite v1.4
 Use current mite-rb version 0.4.1
 

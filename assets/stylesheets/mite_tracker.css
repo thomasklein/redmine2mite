@@ -1,0 +1,13 @@
+a#plugin_mite_tracker_active {
+	background: url('../images/clock_animated.gif') transparent no-repeat;
+	width: 16px;
+	height: 16px;
+	margin-right: -10px;
+	float: left;
+	display: block;
+}
+
+a#plugin_mite_tracker_time {
+	color: #ff8215 !important;
+	margin-left: -4px;
+}

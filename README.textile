@@ -9,6 +9,7 @@ h2. Requirements
 * "Redmine":http://www.redmine.org/ >= 0.9
 * "Ruby on Rails":rubyonrails.org >= 2.3
 * a _mite_.account (you can easily signup for a "free 30 days trial account":https://signup.mite.yo.lk/signup/en )
+* the Ruby Gem _json_ (min. 1.6.5)
 
 *Please note:* For Redmine versions prior to 0.9 use the plugin "version 1.0":http://github.com/thomasklein/Redmine2mite/tree/v1.0. 
 
@@ -34,6 +35,22 @@ h2. Usage
 
 Once the connection to your _mite_.account was verified, sending your time entries to _mite_ is very easy. The two fields _mite_.project and _mite_.service have been added to the time logging mask. When creating or updating a time entry the plugin sends those values to your _mite_.account.
 
+h3. Time tracker
+
+Version 1.5 added the possibility to use the time tracker feature of _mite_ directly in Redmine.
+
+h4. Setup
+
+First of all, you have to activate this feature in the Redmine2mite preferences (link "mite" on the top right corner) by checking the option "Activate tracker functionality, if time entries are booked without effort". It is by default deactivated.
+
+h4. Starting it
+
+From now on, if you book leave the value for the amount of time empty or "0h0m" (as it is set automatically) and save a new time entry in Redmine, the tracker is started is Redmine and in _mite_ simultaneously. You can see its status in the title bar of the current window and right beside the Redmine2mite preferences link.
+
+h4. Stopping it
+
+Click on the orange timer right beside the Redmine2mite preferences link. It links to the list of time entries of the associated issue. Beside the active time entry is a rotating clock. Click on it to stop the time tracker and save the current time both to Redmine and to mite.
+
 h2. Known issues
 
 h3. How do i uninstall the plugin?
@@ -42,7 +59,7 @@ Well, currently "there is no easy way doing this":http://www.redmine.org/boards/
 * remove the directory <code>redmine2mite</code> out of the <code>/vendor/plugins</code> directory. 
 * manually delete all of the plugins database tables and newly added fields to existing tables
 ** tables: <code>mite_bindings</code>, <code>mite_rsrcs</code>
-** added fields in table <code>user_preferences</code>: <code>mite_account_name</code>, <code>mite_api_key</code>, <code>mite_note_pattern</code>, <code>mite_connection_updated_on</code>
+** added fields in table <code>user_preferences</code>: <code>mite_account_name</code>, <code>mite_api_key</code>, <code>mite_note_pattern</code>, <code>mite_connection_updated_on</code>, <code>mite_tracker_option</code>, <code>mite_tracker_data</code>
 ** added fields in table <code>time_entries</code>: <code>mite_time_entry_id</code>, <code>mite_project_id</code>, <code>mite_service_id</code>, <code>mite_time_entry_updated_on</code>
 * all entries "redmine_mite" in table <code>schema_migrations</code>
 

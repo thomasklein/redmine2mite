@@ -8,7 +8,7 @@ class MiteController < ApplicationController
   
   before_filter :require_login
   
-  REDMINE_2_MITE_VERSION = 'v1.2.1'
+  REDMINE_2_MITE_VERSION = 'v1.5'
   
   def index
     
@@ -39,6 +39,48 @@ class MiteController < ApplicationController
     
     redirect_to :action => "index"
   end
+
+#########
+# Gets called by an AJAX request in 'mite_tracker.js' and 
+# - stops the remote mite tracker
+# - nullifies the value for User.current.preference.mite_tracker_data
+# Returns either true or an error text as response back to the calling script
+#########
+  def stop_tracker
+    
+    params = request.parameters
+    
+    begin
+      
+      Mite.account = User.current.preference["mite_account_name"]
+      Mite.key = User.current.preference["mite_api_key"]
+      Mite.user_agent = 'Redmine2mite/' + MiteController::REDMINE_2_MITE_VERSION
+      mtracker = Mite::Tracker.current
+      
+      if mtracker.stop
+        
+        te = TimeEntry.find(params["te"])
+        
+        hours = Float(params["time"])
+        
+        # do not consider a time if it not 0
+        if hours > 0
+          
+          te[:hours] = hours / 60
+          te.save
+        end
+        
+        User.current.preference.mite_tracker_data = {:active => false}
+        User.current.preference.save
+        render :text => "Success"
+      else
+        raise "Tracker was stopped for an unforseen reason."
+      end
+      
+    rescue StandardError => exception
+      render :text => "Error: " + exception
+    end
+  end # stop_tracker
 
   
 #########

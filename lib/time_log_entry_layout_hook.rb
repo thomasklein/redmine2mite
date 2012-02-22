@@ -18,5 +18,4 @@ class TimeLogEntryLayoutHook < Redmine::Hook::ViewListener
       
       new_fields
   end
-
 end

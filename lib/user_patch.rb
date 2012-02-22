@@ -15,7 +15,6 @@ module UserPatch
       # :dependent => :destroy is already defined for the super class relationship (mite_rsrc)
         has_many :mite_projects
         has_many :mite_services
-        
       end
   end
   

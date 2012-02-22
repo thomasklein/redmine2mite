@@ -9,6 +9,7 @@ h2. Anforderungen
 * "Redmine":http://www.redmine.org/ >= 0.9
 * "Ruby on Rails":rubyonrails.org >= 2.3
 * ein _mite_.account ("30 Tage kann kostenfrei getestet werden":https://signup.mite.yo.lk/signup/de)
+* das Ruby Gem _json_ (mind. 1.6.5)
 
 *Hinweis:* Für ältere Redmine-Versionen bitte die "Version 1.0":http://github.com/thomasklein/Redmine2mite/tree/v1.0 des Plugins verwenden.
 
@@ -34,6 +35,22 @@ h2. Verwendung
 
 Nachdem die Verbindung zu deinem _mite_.account bestätigt wurde, kannst du nun sehr einfach Zeiteinträge anlegen. Die zwei Felder _mite_.projekt and _mite_.leistung wurden als zusätzliche Angaben in die Eingabemaske für einen Zeiteintrag hinzugefügt. Wenn du nun einen Zeiteintrag anlegst oder aktualisierst, dann sendet das Plugin diese Daten an deinen _mite_.account.
 
+h3. Stoppuhr-Funktionalität
+
+Seit Version 1.5 bietet sich die Möglichkeit die Stoppuhr-Funktionalität aus _mite_ direkt in Redmine zu nutzen.
+
+h4. Setup
+
+Zunächst muss die Funktion in den Redmine2mite-Einstellungen aktivieren, da es per Standardeinstellung deaktiviert ist.
+
+h4. Starten
+
+Von nun an, wenn du einen neuen Zeiteintrag anlegst und das Feld für den Aufwand leer lässt (oder "0h0m" wie es vom Plugin gesetzt wird) dann wird die Stoppuhr gestartet. Du kannst deren Status sowohl in der Titelleiste des aktuellen Fensters sehen, als auch rechts neben dem Link der zu den Redmine2mite-Einstellungen führt.
+
+h4. Stoppen
+
+Möchtest du die aktuell laufende Stoppuhr stoppen und damit die Zeit übernehmen, dann klicke zunächst auf den Link mit der orangenen Statuszeit gleich rechts neben dem Link zu den Redmine2mite-Einstellungen. Dieser führt dich zu einer Liste aller Zeiteinträge die dem verbundenen Ticket zugeordnet sind. Neben dem aktiven Ticket befindet sich eine Uhr mit rotierenden Zeigern. Wenn du darauf klickst, wird die Stoppuhr angehalten und die aktuelle Zeit sowohl in Redmine als auch in _mite_ gespeichert.
+
 h2. FAQ
 
 h3. Wie deinstalliere ich das Plugin wieder?
@@ -42,7 +59,7 @@ Da gibt es "im Moment noch keinen sauberen Weg":http://www.redmine.org/boards/2/
 * das Verzeichnis <code>redmine2mite</code> aus dem <code>/vendor/plugins</code> - Verzeichnis löschen
 * die durch das Plugin hinzugefügten Datenbanktabellen und Felder in bestehenden Tabellen müssen per Hand gelöscht werden 
 ** Tabellen: <code>mite_bindings</code>, <code>mite_rsrcs</code>
-** neue Felder in Tabelle <code>user_preferences</code>: <code>mite_account_name</code>, <code>mite_api_key</code>, <code>mite_note_pattern</code>, <code>mite_connection_updated_on</code>
+** neue Felder in Tabelle <code>user_preferences</code>: <code>mite_account_name</code>, <code>mite_api_key</code>, <code>mite_note_pattern</code>, <code>mite_connection_updated_on</code>, <code>mite_tracker_option</code>, <code>mite_tracker_data</code>
 ** neue Felder in Tabelle <code>time_entries</code>: <code>mite_time_entry_id</code>, <code>mite_project_id</code>, <code>mite_service_id</code>, <code>mite_time_entry_updated_on</code>
 * alle Einträge "redmine2mite" in Tabelle <code>schema_migrations</code>
 
