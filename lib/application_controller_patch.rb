@@ -11,9 +11,12 @@ module ApplicationControllerPatch
         def mite_conditions_apply?
           
           User.current && 
+          User.current.preference &&
           User.current.preference.mite_connection_updated_on && 
           User.current.preference.mite_tracker_option &&
-          !User.current.preference.mite_tracker_data[:active].nil?
+          User.current.preference.mite_tracker_data &&
+          User.current.preference.mite_tracker_data.include?(:active) && 
+          User.current.preference.mite_tracker_data[:active]
         end
         
         def plugin_mite_check_tracker_status

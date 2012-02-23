@@ -49,7 +49,7 @@ From now on, if you book leave the value for the amount of time empty or "0h0m" 
 
 h4. Stopping it
 
-Click on the orange timer right beside the Redmine2mite preferences link. It links to the list of time entries of the associated issue. Beside the active time entry is a rotating clock. Click on it to stop the time tracker and save the current time both to Redmine and to mite.
+Click on the orange timer right beside the Redmine2mite preferences link. It links to the list of time entries of the associated ticket. Beside the active time entry is a rotating clock. Click on it to stop the time tracker and save the current time both to Redmine and to mite.
 
 h2. Known issues
 
