@@ -39,6 +39,10 @@ h3. Stoppuhr-Funktionalität
 
 Seit Version 1.5 bietet sich die Möglichkeit die Stoppuhr-Funktionalität aus _mite_ direkt in Redmine zu nutzen.
 
+h4. Vorraussetzung
+
+Deine Benutzer-Rolle benötigt die Berechtigung "Selbst gebuchte Aufwände bearbeiten".
+
 h4. Setup
 
 Zunächst muss die Funktion in den Redmine2mite-Einstellungen aktivieren, da es per Standardeinstellung deaktiviert ist.

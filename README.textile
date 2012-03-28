@@ -39,6 +39,10 @@ h3. Time tracker
 
 Version 1.5 added the possibility to use the time tracker feature of _mite_ directly in Redmine.
 
+h4. Precondition
+
+Your user role must have the permission to "Edit own time logs".
+
 h4. Setup
 
 First of all, you have to activate this feature in the Redmine2mite preferences (link "mite" on the top right corner) by checking the option "Activate tracker functionality, if time entries are booked without effort". It is by default deactivated.
