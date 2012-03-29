@@ -134,8 +134,7 @@ class MiteController < ApplicationController
             
           # UPDATE project in Redmine
           #####################
-            rsrc_name = projectM.name
-            rsrc_name += " (" + projectM.customer_name + ")" if projectM.respond_to?("customer_name")
+            rsrc_name = create_rsrc_name(projectM)
             
             existingProjectR.update_attributes(:mite_rsrc_name => rsrc_name,
                                                :mite_rsrc_updated_at => projectM.updated_at.localtime)
@@ -144,8 +143,7 @@ class MiteController < ApplicationController
         #####################
           else
             newProjectR = MiteProject.new do |p|
-              p.mite_rsrc_name = projectM.name
-              p.mite_rsrc_name += " (" + projectM.customer_name + ")" if projectM.respond_to?("customer_name")
+              p.mite_rsrc_name = create_rsrc_name(projectM)
               p.mite_rsrc_id = projectM.id
               p.mite_rsrc_updated_at = projectM.updated_at
               p.user_id = User.current.id
@@ -372,4 +370,12 @@ class MiteController < ApplicationController
       flash[msg_type] = msg
       redirect_to :action => "index"
     end
+
+protected
+    def create_rsrc_name(project)
+      name = project.name
+      name = project.customer_name + " - " + name if project.respond_to?("customer_name")
+      return name
+    end
+
 end
