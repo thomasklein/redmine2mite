@@ -12,7 +12,7 @@ en:
     msg_invalid_account_name: "Your login is not valid."
     msg_invalid_api_key: "Your api key seems to be invalid."
     msg_error_disconnecting_account: "Could not disconnect your account."
-    msg_confirm_disconnecting_account: "Are you sure you want to disconnect your mite.account? Time entries in mite and Redmine will still be available afterwards. In Redmine will be deleted your: \n - mite account data \n - imported mite.projects and mite.services \n - data to interconnect your mite data with your Redmine data"
+    msg_confirm_disconnecting_account: "Are you sure you want to disconnect your mite.account? Time entries in mite and Redmine will still be available afterwards. \n The following will be deleted in Redmine: \n - mite account data \n - imported mite.projects and mite.services \n - data to interconnect your mite data with your Redmine data"
     msg_success_disconnecting_account: "Your <em>mite</em>.account was disconnected."
 
 #################
