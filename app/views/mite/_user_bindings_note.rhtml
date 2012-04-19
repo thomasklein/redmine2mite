@@ -1,23 +1,17 @@
-	<label for="user_preferences_mite_omit_transmission_option"><%= l(:header_omit_transmission_option) %></label>
-	<%= check_box(:user_preferences, "mite_omit_transmission_option") %>
-
-	<label for="user_preferences_mite_tracker_option"><%= l(:header_tracker_option) %></label>
-	<%= check_box(:user_preferences, "mite_tracker_option") %>
-
-<!-- NOTE PATTERN -->
-	<label for="user_preferences_mite_note_pattern"><%= l(:header_note_pattern) %></label>
-	<p class="plugin_mite_preferences_help"><%= l(:help_note_pattern) %></p>
-	<%= text_field :user_preferences, :mite_note_pattern, :class => "plugin_mite_note_pattern" %>
-	
-	
-	<div class="formularButtons">
-		<div class="buttonsRight">
-			<!-- functionality implemented in mite.js -->
-			<%= submit_tag l('save_bindings'), :id => "save_bindings" %>
-		</div>
-		<div class="buttonsLeft">
-			<input type="reset" value="<%= l(:reset_form) %>" />
-		</div>
-		<div class="plugin_mite_loading_notifier" id="mite_plugin_notifier_preferences">.</div>
-		<div class="clearBoth"></div>
-	</div><!-- formularButtons-->
+<label for="user_preferences_mite_omit_transmission_option"><%= l(:header_omit_transmission_option) %></label>
+<%= check_box(:user_preferences, "mite_omit_transmission_option") %>
+<label for="user_preferences_mite_tracker_option"><%= l(:header_tracker_option) %></label>
+<%= check_box(:user_preferences, "mite_tracker_option") %>
+<label for="user_preferences_mite_note_pattern"><%= l(:header_note_pattern) %></label>
+<p class="plugin_mite_preferences_help"><%= l(:help_note_pattern) %></p>
+<%= text_field :user_preferences, :mite_note_pattern, :class => "plugin_mite_note_pattern" %>
+<div class="formularButtons">
+	<div class="buttonsRight">
+		<%= submit_tag l('save_bindings'), :id => "save_bindings" %>
+	</div>
+	<div class="buttonsLeft">
+		<input type="reset" value="<%= l(:reset_form) %>" />
+	</div>
+	<div class="plugin_mite_loading_notifier" id="mite_plugin_notifier_preferences">.</div>
+	<div class="clearBoth"></div>
+</div>

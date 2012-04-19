@@ -1,18 +1,11 @@
 <% content_for :header_tags do %>
-    <%= stylesheet_link_tag 'mite', :plugin => 'redmine2mite', :cache => false  %>
-	<%= javascript_include_tag 'mite', :plugin => 'redmine2mite', :cache => false  %>
+	<%= stylesheet_link_tag 'mite', :plugin => 'redmine2mite', :cache => false  %>
+	<%= javascript_include_tag 'mite_preferences_form', :plugin => 'redmine2mite', :cache => false  %>
 <% end %>
-
 <% html_title(l(:plugin_user_preferences_title)) -%>
-
 <div id="plugin_mite_config">
-
-<!-- USER ACCOUNT SETTINGS -->
-
 <h2><%= l(:header_plugin_preferences) %></h2>
-
 <% form_for(:mite, @user_preferences, :url => { :action => 'process_account_form' }) do |f| %>
-
 <%  # ACTIVE connection
 	if @last_updated %>
 		<%= render :partial => "connection_active", :locals => {:f => f, :last_updated => @last_updated} %>
@@ -20,7 +13,6 @@
 	else %>
 		<%= render :partial => "connection_inactive", :locals => {:f => f} %>
 <% 	end %>
-	
 	<div class="formularButtons">
 		<div class="buttonsRight">
 			<%= submit_tag l('check_account_data'), :name => "check_account_data", :id => 'check_account_data' %>
@@ -28,7 +20,6 @@
 		<div class="buttonsLeft">
 			
 			<% if User.current.preference[:mite_connection_updated_on] %>
-				<!-- functionality implemented in mite.js -->
 				<%= submit_tag l('disconnect_account_data'), :name => 'disconnect_account_data', :id => 'disconnect_account_data' %>
 				<p class="plugin_mite_hidden" id="msg_confirm_disconnecting_account"><%= l(:msg_confirm_disconnecting_account) %></p>
 			<% end %>
@@ -38,27 +29,18 @@
 		<input type='hidden' id='mite_account_data_button_pressed' name="mite_account_data_button_pressed" />
 		
 		<div class="clearBoth"></div>
-	</div><!-- formularButtons-->
+	</div>
 <% end %>
-
-<!-- PROJECT BINDINGS -->
-
 <% if @last_updated && !@user_projects.empty? %>
 	
 	<div id="plugin_mite_user_bindings">
-	
+	<input type='hidden' id='mite_customer_to_project_bindings' value='<%= @mite_customer_to_project_bindings.to_json %>' />
+	<input type='hidden' id='mite_projects' value='<%= @user_mite_projects.to_json %>' />
 	<% form_tag({:action => 'save_preferences'}, :method => "post") do %>
-	
 		<%= render :partial => "user_bindings_header", :locals => {:user_projects => @user_projects} %>
-	
 		<%= render :partial => "user_bindings_projects", :locals => {:user_projects => @user_projects, :user_mite_projects => @user_mite_projects, :user_mite_services => @user_mite_services, :bindings_per_project => @bindings_per_project} %>
-	
 		<%= render :partial => "user_bindings_note" %>
-	
 	<% end %>
-	
-	</div><!--plugin_mite_user_bindings -->
-	
+	</div>
 <% end %>
-
-</div><!--plugin_mite_config -->
+</div>

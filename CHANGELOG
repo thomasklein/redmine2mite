@@ -1,3 +1,7 @@
+== Redmine2mite v1.6
+* Refactoring of many code parts
+* Added the possibility to stop the tracker from within the edit issue form
+
 == Redmine2mite v1.5.1
 * Bugfix: Removed nasty bug when no user was logged in and the plugin was active
 * Bugfix: The tracker time was not displayed right

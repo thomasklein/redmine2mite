@@ -9,7 +9,6 @@ module ApplicationControllerPatch
         before_filter :plugin_mite_check_tracker_status, :only => [:show, :index, :edit], :if => :mite_conditions_apply?
         
         def mite_conditions_apply?
-          
           User.current && 
           User.current.preference &&
           User.current.preference.mite_connection_updated_on && 
@@ -20,7 +19,6 @@ module ApplicationControllerPatch
         end
         
         def plugin_mite_check_tracker_status
-          
           Mite.account = User.current.preference["mite_account_name"]
           Mite.key = User.current.preference["mite_api_key"]
           Mite.user_agent = 'Redmine2mite/' + MiteController::REDMINE_2_MITE_VERSION

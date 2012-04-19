@@ -39,6 +39,7 @@ de:
     label_login: "Login"
     label_binding_active: "Bindung aktiv"
     label_api_key: "API-Schlüssel"
+    label_assignment_mite_customer: "<em>mite</em>.kunde <small>(Filter für Liste <em>mite</em>.projekt)</small>"
     label_assignment_mite_project: "<em>mite</em>.projekt"
     label_assignment_mite_services: "<em>mite</em>.leistungen"
     check_account_data: "Daten prüfen und synchronisieren"

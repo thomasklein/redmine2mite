@@ -1,15 +1,11 @@
 <% for user_project in user_projects do %>
-
 	<a name='project_<%= user_project.id %>'></a>
-	
 <% 
 	firstBinding = User.current.mite_bindings.find(:first, :conditions => [ "project_id = ?", user_project.id])
-	
 	fieldset_class = ""
 	cb_checked = 'checked = "checked"'
-	sb_htmlOptionsProjects = {}
+	sb_htmlOptionsProjects = {:class => "mite_project_select"}
 	sb_htmlOptionsServices = {:size => @user_mite_services.size, :multiple => "multiple"}
-	
 # if the current project binding is inactive, mark it as such
 	if firstBinding && firstBinding[:mite_rsrc_id] == -1
 		fieldset_class = "plugin_mite_inactive"
@@ -17,15 +13,14 @@
 		sb_htmlOptionsServices[:disabled] = "disabled"
 		cb_checked = ''
 	end
-%>	
+%>
 	<fieldset id='project_<%= user_project.id %>' class='<%= fieldset_class %>'>
 		<legend>
-			<input type='checkbox' class='project_connection' <%= cb_checked %> id="project_connection_<%= user_project.id %>" title="<%= l('title_activate_deactivate_interconnection') %>" /><label title="<%= l('title_activate_deactivate_interconnection') %>" for="project_connection_<%= user_project.id %>">&nbsp;<%= user_project.name %></label>
+		  <input type='checkbox' class='project_connection' <%= cb_checked %> id="project_connection_<%= user_project.id %>" title="<%= l('title_activate_deactivate_interconnection') %>" /><label title="<%= l('title_activate_deactivate_interconnection') %>" for="project_connection_<%= user_project.id %>">&nbsp;<%= user_project.name %></label>
 		</legend>
 		<input type='hidden' name='bindings[<%= user_project.id %>][]' value="0" />
-		
+    <%= simple_select_with_label(l(:label_assignment_mite_customer), "bindings[#{user_project.id}][]", @user_mite_customers, @bindings_per_project[user_project.id], {:prompt => l('none1_option_select_box')}, {:class => "customer_filter"}) %>
 		<%= simple_select_with_label(l(:label_assignment_mite_project), "bindings[#{user_project.id}][]", @user_mite_projects, @bindings_per_project[user_project.id], {:prompt => l('none1_option_select_box')}, sb_htmlOptionsProjects) %>
-
 		<%= simple_select_with_label(l(:label_assignment_mite_services), "bindings[#{user_project.id}][]", @user_mite_services, @bindings_per_project[user_project.id], {}, sb_htmlOptionsServices) %>
 	</fieldset>
 <% end %>

@@ -27,10 +27,11 @@ Redmine::Plugin.register :redmine2mite do
     Redmine2mite connects your Redmine account with your mite.account. 
     Track your time easily on issues within Redmine and get them automatically send to mite.
     '''
-  version '1.5'
+  version '1.6'
   
   requires_redmine :version_or_higher => '0.8.0'
   menu  :account_menu, :mite, { :controller => 'mite', :action => 'index' }, 
         :caption => 'mite', :id => 'mite_config', :before => :logout,
-        :if => Proc.new{User.current.logged?}, :html => {:id => "plugin_mite_prefs"}
+        :if => Proc.new{User.current.logged?}, 
+        :html => {:id => "plugin_mite_prefs", :style => "color:#FF8215 !important;font-style: italic;"}
 end

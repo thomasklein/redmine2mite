@@ -42,6 +42,7 @@ en:
     label_login: "Login"
     label_binding_active: "Interconnection active"
     label_api_key: "API key"
+    label_assignment_mite_customer: "<em>mite</em>.customer <small>(filter for list <em>mite</em>.project)</small>"
     label_assignment_mite_project: "<em>mite</em>.project"
     label_assignment_mite_services: "<em>mite</em>.services"
 
