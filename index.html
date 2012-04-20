@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Redmine2mite by thomasklein</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Redmine2mite</h1>
+        <h2>Redmine2mite connects your Redmine account with your mite.account. Track your time easily on issues within Redmine and get them automatically send to mite.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/thomasklein/redmine2mite/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/thomasklein/redmine2mite/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/thomasklein/redmine2mite" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <p><a href="http://mite.yo.lk/en"><em>mite</em></a> is a sleek time tracking tool for teams and freelancers.</p>
+
+<p><em>Redmine2mite</em> connects your Redmine account with your <em>mite</em>.account. Track your time easily on issues within Redmine and get them automatically send to <em>mite</em>.</p>
+
+<p>Projects from Redmine can be bundled with <em>mite</em>.projects. Furthermore, you can specify which <em>mite</em>.services should be available in Redmine on a per-project basis.</p>
+
+<h2>Requirements</h2>
+
+<ul>
+<li>
+<a href="http://www.redmine.org">Redmine</a> &gt;= 0.9</li>
+<li>
+<a href="http://rubyonrails.org">Ruby on Rails</a> &gt;= 2.3</li>
+<li>a <em>mite</em>.account (you can easily signup for a <a href="https://signup.mite.yo.lk/signup/en">free 30 days trial account</a>)</li>
+<li>the Ruby Gem <em>json</em> (min. 1.6.5)</li>
+</ul><p><strong>Please note:</strong> For Redmine versions prior to 0.9 use the plugin <a href="http://github.com/thomasklein/Redmine2mite/tree/v1.0">version 1.0</a>. </p>
+
+<h2>Installation</h2>
+
+<p>The following commands are intended to be executed on the command line.</p>
+
+<ol>
+<li>Change to plugins directory: <code>$ cd /path/to/redmine/vendor/plugins</code>
+</li>
+<li>Clone source code from GitHub: <code>$ git clone <a href="http://github.com/thomasklein/redmine2mite">http://github.com/thomasklein/redmine2mite</a></code>
+</li>
+<li>Change to redmine root directory: <code>$ cd /path/to/redmine/</code>
+</li>
+<li>Install the plugin schema by calling <code>rake db:migrate_plugins</code>
+</li>
+<li>Restart your Redmine web server (e.g. Mongrel, Thin, WEBrick) </li>
+<li>Voilá!</li>
+</ol><h2>Setup</h2>
+
+<p>Login to Redmine. You should now see on the top right corner the link "mite". Click on it. </p>
+
+<p>After providing your account data you can now interconnect your <em>mite</em>.projects and <em>mite</em>.services with a specific Redmine project. The selected values will appear on top of the list, if you create a new time entry in the respective project.</p>
+
+<p>Precondition is having Redmine projects assigned to your user, of course :-)</p>
+
+<h2>Usage</h2>
+
+<p>Once the connection to your <em>mite</em>.account was verified, sending your time entries to <em>mite</em> is very easy. The two fields <em>mite</em>.project and <em>mite</em>.service have been added to the time logging mask. When creating or updating a time entry the plugin sends those values to your <em>mite</em>.account.</p>
+
+<h3>Time tracker</h3>
+
+<p>Version 1.5 added the possibility to use the time tracker feature of <em>mite</em> directly in Redmine.</p>
+
+<h4>Precondition</h4>
+
+<p>Your user role must have the permission to "Edit own time logs".</p>
+
+<h4>Setup</h4>
+
+<p>First of all, you have to activate this feature in the Redmine2mite preferences (link "mite" on the top right corner) by checking the option "Activate tracker functionality, if time entries are booked without effort". It is by default deactivated.</p>
+
+<h4>Starting it</h4>
+
+<p>From now on, if you book leave the value for the amount of time empty or "0h0m" (as it is set automatically) and save a new time entry in Redmine, the tracker is started is Redmine and in <em>mite</em> simultaneously. You can see its status in the title bar of the current window and right beside the <em>Redmine2mite</em> preferences link.</p>
+
+<h4>Stopping it</h4>
+
+<p>Click on the orange timer right beside the Redmine2mite preferences link. It links to the list of time entries of the associated ticket. Beside the active time entry is a rotating clock. Click on it to stop the time tracker and save the current time both to Redmine and to mite.</p>
+
+<h2>Known issues</h2>
+
+<h3>How do i uninstall the plugin?</h3>
+
+<p>Well, currently <a href="http://www.redmine.org/boards/2/topics/2820">there is no easy way doing this</a>. </p>
+
+<ul>
+<li>remove the directory <em>redmine2mite</em> out of the <code>/vendor/plugins</code> directory. </li>
+<li>manually delete all of the plugins database tables and newly added fields to existing tables
+
+<ul>
+<li>tables: <code>mite_bindings</code>, <code>mite_rsrcs</code>
+</li>
+<li>added fields in table <code>user_preferences</code>: <code>mite_account_name</code>, <code>mite_api_key</code>, <code>mite_note_pattern</code>, <code>mite_connection_updated_on</code>, <code>mite_tracker_option</code>, <code>mite_tracker_data</code>
+</li>
+<li>added fields in table <code>time_entries</code>: <code>mite_time_entry_id</code>, <code>mite_project_id</code>, <code>mite_service_id</code>, <code>mite_time_entry_updated_on</code>
+</li>
+</ul>
+</li>
+<li>all entries "redmine_mite" in table <code>schema_migrations</code>
+</li>
+</ul><h2>License</h2>
+
+<p><em>Redmine2mite</em> is licensed under the terms of the MIT License, see the included MIT-LICENSE file.</p>
+      </section>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-31041421-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
