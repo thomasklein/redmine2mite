@@ -38,7 +38,10 @@ class MiteSynchronizer::TimeEntries < MiteSynchronizer::Base
   
   def remote_records
     return [] unless local_records.any?
-    @remote_records ||= Mite::TimeEntry.find(:all, :params => {:ids => local_records.map(&:mite_time_entry_id).join(",")})
+    local_records.map(&:mite_time_entry_id).each_slice(500) {
+      |i|
+      @remote_records ||= Mite::TimeEntry.find(:all, :params => {:ids => i.join(",")})
+    }
   end
     
   def local_records
