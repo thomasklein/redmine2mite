@@ -4,8 +4,8 @@
 <% end %>
 <% html_title(l(:plugin_user_preferences_title)) -%>
 <div id="plugin_mite_config">
-<h2><%= l(:header_plugin_preferences) %></h2>
-<% form_for(:mite, @user_preferences, :url => { :action => 'process_account_form' }) do |f| %>
+<h2><%= l(:header_plugin_preferences).html_safe %></h2>
+<%= form_for @user_preferences, :as => 'mite', :url => { :action => 'process_account_form' } do |f| %>
 <%  # ACTIVE connection
 	if @last_updated %>
 		<%= render :partial => "connection_active", :locals => {:f => f, :last_updated => @last_updated} %>
@@ -32,11 +32,10 @@
 	</div>
 <% end %>
 <% if @last_updated && !@user_projects.empty? %>
-	
 	<div id="plugin_mite_user_bindings">
 	<input type='hidden' id='mite_customer_to_project_bindings' value='<%= @mite_customer_to_project_bindings.to_json %>' />
 	<input type='hidden' id='mite_projects' value='<%= @user_mite_projects.to_json %>' />
-	<% form_tag({:action => 'save_preferences'}, :method => "post") do %>
+	<%= form_tag :action => 'save_preferences', :method => "post" do %>
 		<%= render :partial => "user_bindings_header", :locals => {:user_projects => @user_projects} %>
 		<%= render :partial => "user_bindings_projects", :locals => {:user_projects => @user_projects, :user_mite_projects => @user_mite_projects, :user_mite_services => @user_mite_services, :bindings_per_project => @bindings_per_project} %>
 		<%= render :partial => "user_bindings_note" %>

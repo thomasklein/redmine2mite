@@ -20,7 +20,7 @@ class MiteSynchronizer::TimeEntries < MiteSynchronizer::Base
     local_record.update_attributes({
       :mite_project_id => remote_record.project_id,
       :mite_service_id => remote_record.service_id,
-      :mite_time_entry_updated_on => remote_record.updated_at.localtime,
+      :mite_time_entry_updated_on => Time.parse(remote_record.updated_at).localtime,
       :hours => (remote_record.minutes.to_f / 60).to_f,
       :comments => remote_record.note
     })
@@ -38,10 +38,10 @@ class MiteSynchronizer::TimeEntries < MiteSynchronizer::Base
   
   def remote_records
     return [] unless local_records.any?
-    local_records.map(&:mite_time_entry_id).each_slice(500) {
-      |i|
+    local_records.map(&:mite_time_entry_id).each_slice(500) do |i|
       @remote_records ||= Mite::TimeEntry.find(:all, :params => {:ids => i.join(",")})
-    }
+    end
+    @remote_records
   end
     
   def local_records

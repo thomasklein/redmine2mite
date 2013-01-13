@@ -6,17 +6,18 @@ Projects from Redmine can be bundled with _mite_.projects. Furthermore, you can 
 
 h2. Requirements
 
-* "Redmine":http://www.redmine.org/ >= 0.9
-* "Ruby on Rails":rubyonrails.org >= 2.3
+* "Redmine":http://www.redmine.org/ >= 2.0 (tested on 2.12)
+* "Ruby on Rails":rubyonrails.org >= 3.0 (tested on 3.2)
+* "Ruby":ruby-lang.org/ >= 1.9
 * a _mite_.account (you can easily signup for a "free 30 days trial account":https://signup.mite.yo.lk/signup/en )
 * the Ruby Gem _json_ (min. 1.6.5)
 
-*Please note:* For Redmine versions prior to 0.9 use the plugin "version 1.0":http://github.com/thomasklein/Redmine2mite/tree/v1.0. 
+*Please note:* For Redmine versions prior to 2.0 use the plugin "version 1.6":http://github.com/thomasklein/Redmine2mite/tree/v1.6. 
 
 h2. Installation
 
 The following commands are intended to be executed on the command line.
-# Change to plugins directory: <code>$ cd /path/to/redmine/vendor/plugins</code>
+# Change to plugins directory: <code>$ cd /path/to/redmine/plugins</code>
 # Clone source code from GitHub: <code>$ git clone http://github.com/thomasklein/redmine2mite</code>
 # Change to redmine root directory: <code>$ cd /path/to/redmine/</code>
 # Install the plugin schema by calling <code>rake db:migrate_plugins</code>
@@ -60,7 +61,7 @@ h2. Known issues
 h3. How do i uninstall the plugin?
 
 Well, currently "there is no easy way doing this":http://www.redmine.org/boards/2/topics/2820. 
-* remove the directory <code>redmine2mite</code> out of the <code>/vendor/plugins</code> directory. 
+* remove the directory <code>redmine2mite</code> out of the <code>/plugins</code> directory. 
 * manually delete all of the plugins database tables and newly added fields to existing tables
 ** tables: <code>mite_bindings</code>, <code>mite_rsrcs</code>
 ** added fields in table <code>user_preferences</code>: <code>mite_account_name</code>, <code>mite_api_key</code>, <code>mite_note_pattern</code>, <code>mite_connection_updated_on</code>, <code>mite_tracker_option</code>, <code>mite_tracker_data</code>

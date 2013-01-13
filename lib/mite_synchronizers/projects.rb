@@ -10,7 +10,7 @@ class MiteSynchronizer::Projects < MiteSynchronizer::Base
     attributes = {
       :mite_rsrc_id           => remote_record.id,
       :mite_rsrc_name         => remote_record.name,
-      :mite_rsrc_updated_at   => remote_record.updated_at.localtime
+      :mite_rsrc_updated_at   => Time.parse(remote_record.updated_at).localtime
     }
     if (remote_record.customer_id)
       bound_customer = User.current.mite_customers.detect do |local_customer_record|

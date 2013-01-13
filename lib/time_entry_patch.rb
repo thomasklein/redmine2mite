@@ -1,39 +1,40 @@
 require_dependency 'time_entry'
-require 'mite-rb' # to communicate with the mite api
-include ActionController::UrlWriter # to generate link to mite preferences
-
-# TODO: implement observer to get logic out of model
+require 'mite-rb'
 
 module TimeEntryPatch
   
   def self.included(base)
       base.send(:include, InstanceMethods)
 
-    # extends the model TimeEntry
+    # extends TimeEntry
       base.class_eval do
         unloadable
         
-      # new callback: send time entry to mite before it was saved in redmine
-      # but ONLY IF the user has already connected his mite account with redmine
       # mte prefix = mite time entry
         before_create  :mte_prepare_creation, :if => :mite_conditions_apply?
         after_create :mite_tracker_start, :if => :should_mite_tracker_start?
         before_update  :mte_prepare_updating, :if => :mite_conditions_apply?
         before_destroy :mte_prepare_destroying, :if => :mite_conditions_apply?
         
-        named_scope :connected_to_mite, :conditions => ["mite_time_entry_id IS NOT NULL"]
+        scope :connected_to_mite, :conditions => ["mite_time_entry_id IS NOT NULL"]
+
+        safe_attributes 'hours', 'comments', 'issue_id', 'activity_id', 'spent_on', 'custom_field_values', 'custom_fields',
+                        'mite_project_id', 'mite_service_id', 'mite_time_entry_id', 'mite_time_entry_updated_on'
       end
     end
 
     module InstanceMethods
-  
+
     private
+
+      include Rails.application.routes.url_helpers # to generate a link to mite preferences
+
       def mite_conditions_apply?
-        User.current.preference["mite_connection_updated_on"] && self[:mite_project_id]
+        User.current.preference[:mite_connection_updated_on] && self.has_attribute?(:mite_project_id)
       end
-      
+
       def should_mite_tracker_start?
-        User.current.preference[:mite_tracker_option] && self[:mite_project_id] && self[:hours] == 0.0
+        mite_conditions_apply? && User.current.preference[:mite_tracker_option] && self[:hours] == 0.0
       end
   
       # Starts the remote tracker in mite and
@@ -46,7 +47,7 @@ module TimeEntryPatch
           :time => 0,
           :te => self[:id],
           :mite_te => self[:mite_time_entry_id],
-          :issue_url => issue_path(self[:issue_id]) + "/time_entries"}
+          :issue_url => Rails.application.routes.url_helpers.issue_path(:id => self[:issue_id]) + "/time_entries"}
         User.current.preference.save
       end  
   
@@ -58,7 +59,7 @@ module TimeEntryPatch
       def mte_prepare_updating; send_request_to_mite("update"); end
       
       def mte_prepare_destroying; send_request_to_mite("destroy"); end  
-  
+
     # sends the created time entry to mite  
       def send_request_to_mite(type)
         Mite.account = User.current.preference["mite_account_name"]
@@ -73,22 +74,22 @@ module TimeEntryPatch
         rescue StandardError => exception
           p "*************"
           p "EXCEPTION in TimeEntryPatch#send_request_to_mite: " + exception.inspect
+          p $!.backtrace
           p "*************"
         end
-        
+
         begin
-          comment = replace_placeholders(self[:comments],User.current.preference[:mite_note_pattern])
+          comment = replace_placeholders(self[:comments], User.current.preference[:mite_note_pattern])
           # handle possible cases
           if type == "create" || (type == "update" && !mte_exists)
-            mte = Mite::TimeEntry.create(
+            mte = Mite::TimeEntry.create({
               :service_id => self[:mite_service_id],
               :project_id => self[:mite_project_id],
               :minutes => (self[:hours] * 60),
               :date_at => self[:spent_on],
-              :note => comment)
+              :note => comment})
             self[:mite_time_entry_id] = mte.attributes["id"]
-            self[:mite_time_entry_updated_on ] = mte.attributes["updated_at"]
-            
+            self[:mite_time_entry_updated_on] = mte.attributes["updated_at"]
           elsif type == "update" && mte_exists
             mte.project_id = self[:mite_project_id]
             mte.service_id = self[:mite_service_id]
@@ -102,28 +103,25 @@ module TimeEntryPatch
             mte.destroy
           end
         rescue ActiveResource::UnauthorizedAccess # in case the given account params are not valid
-          errors.add_to_base(l("msg_error_verification",:url => url_for(:controller => 'mite', :only_path => true))) # add error message
+          errors.add_to_base( l("msg_error_verification_html",
+                              :url => url_for(:controller => 'mite', :only_path => true)).html_safe) # add error message
           return false # prevent creating a new time entry record
-          
         rescue StandardError => exception # show unforeseen exceptions in the console
           p "*************"
           p "EXCEPTION in TimeEntryPatch#send_request_to_mite: " + exception.inspect
+          p $!.backtrace
           p "*************"
         end
       end
     end
-    
-    
-    def replace_placeholders(comment,pattern)
-      
+
+    def replace_placeholders(comment, pattern)
       return comment unless pattern
-      
       # do not add the placeholders if the pattern was already resolved
       # (marked by "{" and "}") and is part of the comment
       return comment if comment.include?("{") && comment.include?("}")
       
       new_comment = pattern
-      
       new_comment['{issue_id}']= self.issue_id.to_s if new_comment['{issue_id}']
       new_comment['{issue}']= self.issue.subject if new_comment['{issue}']
       new_comment['{issue_tracker}']= self.issue.tracker.name if new_comment['{issue_tracker}']
@@ -135,5 +133,4 @@ module TimeEntryPatch
       
       "#{comment} {#{new_comment}}"
     end
-    
   end

@@ -1,6 +1,6 @@
 <h2><%= l(:header_preferences) %></h2>
 <label><%= l(:header_interconnections) %></label>
-<p class="plugin_mite_preferences_help"><%= l(:help_interconnections) %>
+<p class="plugin_mite_preferences_help"><%= l(:help_interconnections).html_safe %>
 	<ul>
 	<% for user_project in user_projects do %>
 		<li>

@@ -40,9 +40,9 @@ class MiteController < ApplicationController
       nullify_user_preferences_fields
       nullify_time_entry_fields
       MiteRsrc.destroy_all(:user_id => User.current.id)
-      fill_flash_msg(l("msg_success_disconnecting_account"),"notice")
+      fill_flash_msg(l("msg_success_disconnecting_account").html_safe,"notice")
     rescue StandardError => exception
-      fill_flash_msg(l("msg_error_disconnecting_account"), "error", exception)
+      fill_flash_msg(l("msg_error_disconnecting_account").html_safe, "error", exception)
     end
   end
     
@@ -50,9 +50,9 @@ class MiteController < ApplicationController
     User.current.preference.update_attributes(params[:user_preferences])
     begin
       update_bindings(params[:bindings])
-      fill_flash_msg(l("msg_success_saving_bindings"),"notice")
+      fill_flash_msg(l("msg_success_saving_bindings").html_safe,"notice")
     rescue StandardError => exception
-      fill_flash_msg(l("msg_error_saving_bindings"),"error", exception)
+      fill_flash_msg(l("msg_error_saving_bindings").html_safe,"error", exception)
     end
     redirect_to :action => "index"
   end
@@ -67,11 +67,12 @@ class MiteController < ApplicationController
         save_tracked_time
         render :text => "Success"
       else
-        raise "Tracker was stopped for an unforseen reason."
+        raise "Tracker was stopped for an unforeseen reason."
       end
     rescue StandardError => exception
-      print "Tracker was stopped for an unforseen reason." + exception
-      render :text => "Error: " + exception
+      p "Tracker was stopped for an unforeseen reason."
+      p exception
+      render :text => "Error: " + exception.to_s
     end
   end
   

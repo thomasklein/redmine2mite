@@ -1,66 +1,65 @@
+---
 en:
 ########################
 # ACTION-BASED MESSAGES 
 ########################
-    msg_success_saving_bindings: "Your preferences were saved"
-    msg_error_saving_bindings: "Your preferences could not be saved."
-    msg_success_verification: "The connection to your <em>mite</em>.account is now active! All of your projects and services were imported."
-    msg_success_updating_account_data: "Your data was updated."
-    msg_error_updating_account_data: "Could not update your account data. "	
-    msg_error_verification: "Could not connect to your <em>mite</em> account. Please recheck <a href='%{url}'>your account data</a>."
-    msg_missing_account_data: "You forgot to provide your account data."
-    msg_invalid_account_name: "Your login is not valid."
-    msg_invalid_api_key: "Your api key seems to be invalid."
-    msg_error_disconnecting_account: "Could not disconnect your account."
-    msg_confirm_disconnecting_account: "Are you sure you want to disconnect your mite.account? Time entries in mite and Redmine will still be available afterwards. \n The following will be deleted in Redmine: \n - mite account data \n - imported mite.projects and mite.services \n - data to interconnect your mite data with your Redmine data"
-    msg_success_disconnecting_account: "Your <em>mite</em>.account was disconnected."
+  msg_success_saving_bindings: "Your preferences were saved"
+  msg_error_saving_bindings: "Your preferences could not be saved."
+  msg_success_verification: "The connection to your <em>mite</em>.account is now active! All of your projects and services were imported."
+  msg_success_updating_account_data: "Your data was updated."
+  msg_error_updating_account_data: "Could not update your account data. "	
+  msg_error_verification: "Could not connect to your <em>mite</em> account. Please recheck <a href='%{url}'>your account data</a>."
+  msg_missing_account_data: "You forgot to provide your account data."
+  msg_invalid_account_name: "Your login is not valid."
+  msg_invalid_api_key: "Your api key seems to be invalid."
+  msg_error_disconnecting_account: "Could not disconnect your account."
+  msg_confirm_disconnecting_account: "Are you sure you want to disconnect your mite.account? Time entries in mite and Redmine will still be available afterwards. \n The following will be deleted in Redmine: \n - mite account data \n - imported mite.projects and mite.services \n - data to interconnect your mite data with your Redmine data"
+  msg_success_disconnecting_account: "Your <em>mite</em>.account was disconnected."
 
 #################
 # STATIC TEXTS
 #################
 # user account
-    header_plugin_preferences: "Connection to your <em>mite</em>.account"
-    connection_verified: "<strong>Status:</strong> Connection active (Updated at <small>%{date}</small>)"
-    connection_unverified: "<strong>Status:</strong> Not connected"
-    header_omit_transmission_option: "Add option in time entry form to not send the current time entry to <em>mite</em>"
-    header_tracker_option: "Activate tracker functionality, if time entries are booked without effort"
-    header_preferences: "Preferences"
-    header_note_pattern: "Additional infos for a time entry note"
-    help_note_pattern: "You can define additional information sent with each time entry within the comments. For dynamic information you can use the following placeholders:<br />{issue_id}, {issue}, {issue_tracker}, {issue_category}, {project_id}, {project}, {user_id}, {user}</code>."
+  header_plugin_preferences: "Connection to your <em>mite</em>.account"
+  connection_verified: "<strong>Status:</strong> Connection active (Updated at <small>%{date}</small>)"
+  connection_unverified: "<strong>Status:</strong> Not connected"
+  header_omit_transmission_option: "Add option in time entry form to not send the current time entry to <em>mite</em>"
+  header_tracker_option: "Activate tracker functionality, if time entries are booked without effort"
+  header_preferences: "Preferences"
+  header_note_pattern: "Additional infos for a time entry note"
+  help_note_pattern: "You can define additional information sent with each time entry within the comments. For dynamic information you can use the following placeholders:<br />{issue_id}, {issue}, {issue_tracker}, {issue_category}, {project_id}, {project}, {user_id}, {user}</code>."
+  header_interconnections: "Interconnections"
+  help_interconnections: "Selected <em>mite</em>.projects / <em>mite</em>.services will be shown on top of the selection lists for a new time entry. You can choose multiple services by clicking with a pressed control key (Windows) or command key (Mac) on several entries in the lists. If you don't want to interconnect certain projects to <em>mite</em> you can also deactivate the interconnection.<br /><br /> Quicklinks to your Redmine projects"
+  plugin_user_preferences_title: "Redmine2mite user settings"
+  title_activate_deactivate_interconnection: "Activate/Deactivate project interconnection"
 
-    header_interconnections: "Interconnections"
-    help_interconnections: "Selected <em>mite</em>.projects / <em>mite</em>.services will be shown on top of the selection lists for a new time entry. You can choose multiple services by clicking with a pressed control key (Windows) or command key (Mac) on several entries in the lists. If you don't want to interconnect certain projects to <em>mite</em> you can also deactivate the interconnection.<br /><br /> Quicklinks to your Redmine projects"
-
-    plugin_user_preferences_title: "Redmine2mite user settings"
-    title_activate_deactivate_interconnection: "Activate/Deactivate project interconnection"
-    
 #################
 # LABELS, BUTTONS AND LINKS
 #################
 
-    # user account
-    label_login: "Login"
-    label_binding_active: "Interconnection active"
-    label_api_key: "API key"
-    label_assignment_mite_customer: "<em>mite</em>.customer <small>(filter for list <em>mite</em>.project)</small>"
-    label_assignment_mite_project: "<em>mite</em>.project"
-    label_assignment_mite_services: "<em>mite</em>.services"
+  # user account
+  label_login: "Login"
+  label_binding_active: "Interconnection active"
+  label_api_key: "API key"
+  label_assignment_mite_customer: "<em>mite</em>.customer <small>(filter for list <em>mite</em>.project)</small>"
+  label_assignment_mite_project: "<em>mite</em>.project"
+  label_assignment_mite_services: "<em>mite</em>.services"
 
-    check_account_data: "Check data and synchronize"
-    check_account_data_active: "Checking data and synchronizing..."
-    save_bindings: "Save preferences"
-    save_bindings_active: "Saving preferences..."
-    disconnect_account_data: "Disconnect mite.account"
-    disconnecting_account_data_active: "Disconnecting account..."
-    link_change_value: "Change"
+  check_account_data: "Check data and synchronize"
+  check_account_data_active: "Checking data and synchronizing..."
+  save_bindings: "Save preferences"
+  save_bindings_active: "Saving preferences..."
+  disconnect_account_data: "Disconnect mite.account"
+  disconnecting_account_data_active: "Disconnecting account..."
+  link_change_value: "Change"
 
-    # time entries
-    label_option_group_other_services: "other services"
-    label_mite_project: <em>mite</em>.project
-    label_mite_service: <em>mite</em>.service
-    label_option_send_te_to_mite: "Send to <em>mite</em>"
+  # time entries
+  label_option_group_other_services: "other services"
+  label_mite_project: <em>mite</em>.project
+  label_mite_service: <em>mite</em>.service
+  label_option_send_te_to_mite: "Send to <em>mite</em>"
 
-    # other
-    none1_option_select_box: "…"
-    none2_option_select_box: "…"
-    reset_form: "Reset"
+  # other
+  none1_option_select_box: "…"
+  none2_option_select_box: "…"
+  reset_form: "Reset"

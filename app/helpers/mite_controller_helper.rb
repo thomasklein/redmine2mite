@@ -99,13 +99,13 @@ module MiteControllerHelper
     if msg_type == "error"
       if exception.class == ActiveResource::UnauthorizedAccess
         msg = l("msg_invalid_api_key")
-        details = exception
+        details = exception.to_s
       elsif exception.class == ActiveResource::ResourceNotFound
         msg = l("msg_invalid_account_name")
-        details = exception
+        details = exception.to_s
       elsif exception.class == ActiveRecord::RecordInvalid
         msg = "Could not create new resource because entry already exists!"
-        details = exception
+        details = exception.to_s
       elsif exception.class == MiteAccountDataEmptyError
         msg = l("msg_missing_account_data")
       end
@@ -116,10 +116,10 @@ module MiteControllerHelper
       p "*************"
     end  
 
-    if details 
+    unless details.empty? 
       msg += "<br /><small>#{details}</small>"
     end
-    flash[msg_type] = msg
+    flash[msg_type] = msg.html_safe
   end
   
   def update_user_preferences(params)
@@ -129,7 +129,7 @@ module MiteControllerHelper
     if up[:mite_connection_updated_on]
       return l("msg_success_updating_account_data")
     end
-    l("msg_success_verification")
+    l("msg_success_verification").html_safe
   end
   
   def update_bindings(bindings_raw)

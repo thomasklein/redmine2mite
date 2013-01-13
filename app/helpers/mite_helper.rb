@@ -1,5 +1,6 @@
 module MiteHelper
   
+  # NEEDS REFACTORING!!!!
   #******************************
   # Return a div container containing
   # - possible option to deactivate attaching mite resources
@@ -7,34 +8,37 @@ module MiteHelper
   # - select box to a mite project
   # - select box to a mite service
   #
-  def self.mite_rsrcs_assignment_container(project_id, display_initially = true)
+  def self.mite_rsrcs_assignment_container(time_entry, display_initially = true)
     display = ""
     display = style='display:none' if display_initially
     new_fields = "<div id='mite_resources_wrapper' #{display}>"
     if User.current.preference.mite_omit_transmission_option
       new_fields += 
-        "<p><label for='time_entry_option_send_te_to_mite'>#{I18n.translate(:label_option_send_te_to_mite)}</label>" +
+        "<p><label for='time_entry_option_send_te_to_mite'>#{I18n.translate(:label_option_send_te_to_mite).html_safe}</label>" +
         "<input type='checkbox' id='option_send_te_to_mite' value='1' checked='checked' /></p>"
     end
     new_fields += 
       "<div id='mite_resources'>" +
-      "<p><label for='time_entry_mite_project_id'>#{I18n.translate(:label_mite_project)}</label>" + 
+      "<p><label for='time_entry_mite_project_id'>#{I18n.translate(:label_mite_project).html_safe}</label>" + 
       self::select_binded_mite_rsrcs(
         :time_entry,
         :mite_project_id,
         MiteProject,
-        project_id,
-        :include_blank => I18n.translate(:none1_option_select_box), :has_at_most_one_binding => true) + 
+        time_entry.project_id,
+        :include_blank => I18n.translate(:none1_option_select_box), 
+        :has_at_most_one_binding => true,
+        :selected_mite_resource => time_entry.mite_project_id) + 
       "</p>"
     new_fields += 
-      "<p><label for='time_entry_mite_service_id'>#{I18n.translate(:label_mite_service)}</label>" + 
+      "<p><label for='time_entry_mite_service_id'>#{I18n.translate(:label_mite_service).html_safe}</label>" + 
       self::select_binded_mite_rsrcs(
         :time_entry,
         :mite_service_id,
         MiteService,
-        project_id,
+        time_entry.project_id,
         :include_blank => I18n.translate(:none2_option_select_box),
-        :optgroup_separator => I18n.translate(:label_option_group_other_services)) + 
+        :optgroup_separator => I18n.translate(:label_option_group_other_services),
+        :selected_mite_resource => time_entry.mite_service_id) + 
       "</p>"
     new_fields += "</div><!-- mite_resources -->"
     new_fields += "</div><!-- mite_resources_wrapper -->"
@@ -47,6 +51,7 @@ module MiteHelper
   def self.select_binded_mite_rsrcs(namespace,field_name,rsrc_klass,project_id, options = {})
     collection = {}
     options_html = ''
+    selected_attr = ''
     collection[:binded_rsrces] = User.current.mite_bindings.select{|binding| (binding.mite_rsrc.class == rsrc_klass) && (binding.project_id == project_id)}.collect{|binding| [binding.mite_rsrc.mite_rsrc_id,binding.mite_rsrc.mite_rsrc_name]}
   # In case only ONE binded resource shoud be possible AND ONE IS BINDED 
   # display only the name of the resource as simple text since there's nothing to choose from
@@ -56,20 +61,24 @@ module MiteHelper
   # put binded resources on top
     if !collection[:binded_rsrces].empty?
       collection[:binded_rsrces].each do |key, value|
-        options_html << "<option value='#{key}'>#{value}</option>\n"
+        selected_attr = " selected" if options[:selected_mite_resource] == key
+        options_html << "<option value='#{key}'#{selected_attr}>#{value}</option>\n"
+        selected_attr = ""
       end
     end
-    if !options[:show_only_binded_rsrcs]
-      collection[:other_rsrces] = User.current.mite_rsrcs.select{|rsrc| (rsrc.class == rsrc_klass) && !collection[:binded_rsrces].include?([rsrc.mite_rsrc_id,rsrc.mite_rsrc_name])}.collect{|rsrc| [rsrc.mite_rsrc_id,rsrc.mite_rsrc_name]}
-      options_other_rsces = ''
-      collection[:other_rsrces].each do |key, value|
-        options_other_rsces << "<option value='#{key}'>#{value}</option>\n"
-      end
-      if !collection[:other_rsrces].empty? && !collection[:binded_rsrces].empty? && !options[:has_at_most_one_binding]
-        options_other_rsces = "<optgroup label='#{options[:optgroup_separator]}'>" + options_other_rsces + "</optgroup>"
-      end
-      options_html << options_other_rsces
+    
+    collection[:other_rsrces] = User.current.mite_rsrcs.select{|rsrc| (rsrc.class == rsrc_klass) && !collection[:binded_rsrces].include?([rsrc.mite_rsrc_id,rsrc.mite_rsrc_name])}.collect{|rsrc| [rsrc.mite_rsrc_id,rsrc.mite_rsrc_name]}
+    options_other_rsces = ''
+    collection[:other_rsrces].each do |key, value|
+      selected_attr = " selected" if options[:selected_mite_resource] == key
+      options_other_rsces << "<option value='#{key}'#{selected_attr}>#{value}</option>\n"
+      selected_attr = ""
     end
+    if !collection[:other_rsrces].empty? && !collection[:binded_rsrces].empty? && !options[:has_at_most_one_binding]
+      options_other_rsces = "<optgroup label='#{options[:optgroup_separator]}'>" + options_other_rsces + "</optgroup>"
+    end
+    options_html << options_other_rsces
+  
     if options[:include_blank]
       options_html = "<option>#{options[:include_blank]}</option>\n" + options_html
     end

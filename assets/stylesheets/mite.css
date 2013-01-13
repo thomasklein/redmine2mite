@@ -152,7 +152,7 @@ a#plugin_mite_link_change_value, a#plugin_mite_link_change_value:active {
 
 a#plugin_mite_link_change_value:hover {
 	-moz-border-radius:5px;
-	-khtml-border-radius:5px;
+	-webkit-border-radius:5px;
 	text-shadow: 0 1px 1px #E6D0C9;
 	background-color: #5e7edb;
 	color: white !important;

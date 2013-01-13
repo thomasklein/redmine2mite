@@ -1,0 +1,11 @@
+<div class='plugin_mite_connection_active'>
+  <div class='plugin_mite_connection_status_msg'>
+    <%= l(:connection_verified, :date => last_updated).html_safe %>
+  </div>
+  <%= f.label(:mite_account_name, l(:label_login)) %>
+  https:// <%= f.text_field(:mite_account_name, :class => 'plugin_mite_account_name readonly', :readonly => 'readonly') %> .mite.yo.lk
+  <%= f.label(:mite_api_key, l(:label_api_key)) %>
+  <%= password_field_tag '', '*************', :id => "mite_api_key_inactive", :class => "plugin_mite_api_key readonly", :readonly => "readonly" %>
+  <%= f.hidden_field(:mite_api_key) %>
+  <a id='plugin_mite_link_change_value'><%= l(:link_change_value) %></a>
+</div>

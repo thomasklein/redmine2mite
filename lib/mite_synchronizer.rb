@@ -44,7 +44,7 @@ module MiteSynchronizer
 
     def changed_remote_records
       @changed_remote_records ||= remote_records.select do |remote_record|
-        remote_record.updated_at > User.current.preference.mite_connection_updated_on
+        Time.parse(remote_record.updated_at) > User.current.preference.mite_connection_updated_on
       end
     end
 
@@ -61,7 +61,7 @@ module MiteSynchronizer
       local_record.update_attributes({
         :mite_rsrc_id           => remote_record.id,
         :mite_rsrc_name         => remote_record.name,
-        :mite_rsrc_updated_at   => remote_record.updated_at.localtime
+        :mite_rsrc_updated_at   => Time.parse(remote_record.updated_at).localtime
       })
     end
     

@@ -1,20 +1,20 @@
 require 'active_support'
 require 'active_resource'
-require 'mite/version'
+require 'mite/version.rb'
 
 # The official ruby library for interacting with the RESTful API of mite,
 # a sleek time tracking webapp.
 
 module Mite
-  
+
   class << self
-    attr_accessor :email, :password, :host_format, :domain_format, :protocol, :port, :user_agent
-    attr_reader :account, :key
+    attr_accessor :email, :password, :host_format, :domain_format, :port
+    attr_reader :account, :key, :protocol, :user_agent
 
     # Sets the account name, and updates all resources with the new domain.
     def account=(name)
       resources.each do |klass|
-        klass.site = klass.site_format % (host_format % [protocol, domain_format % name, ":#{port}"])
+        klass.site = klass.site_format % (host_format % ['https', domain_format % name, ":#{port}"])
       end
       @account = name
     end
@@ -37,7 +37,7 @@ module Mite
       end
       @key = value
     end
-    
+
     # Sets the mite.user_agent for all resources.
     def user_agent=(user_agent)
       resources.each do |klass|
@@ -46,35 +46,38 @@ module Mite
       @user_agent = user_agent
     end
 
+    def protocol=(protocol)
+      $stderr.puts "WARNING: mite.api can only be accessed over HTTPS." unless protocol == 'https'
+    end
+
     def resources
       @resources ||= []
     end
-  
+
     # Validates connection
     # returns true when valid false when not
     def validate
       validate! rescue false
     end
-    
-    # Same as validate_connection 
+
+    # Same as validate_connection
     # but raises http-error when connection is invalid
     def validate!
       !!Mite::Account.find
     end
-  
+
     def version
       Mite::VERSION
     end
   end
-  
+
   self.host_format   = '%s://%s%s'
   self.domain_format = '%s.mite.yo.lk'
-  self.protocol      = 'https'
   self.port          = ''
   self.user_agent    = "mite-rb/#{Mite::VERSION}"
-  
+
   class MethodNotAvaible < StandardError; end
-  
+
   module ResourceWithoutWriteAccess
     def save
       raise MethodNotAvaible, "Cannot save #{self.class.name} over mite.api"
@@ -88,26 +91,26 @@ module Mite
       raise MethodNotAvaible, "Cannot save #{self.class.name} over mite.api"
     end
   end
-  
+
   module ResourceWithActiveArchived
     def self.included(base)
       base.extend(ClassMethods)
     end
-    
+
     module ClassMethods
       def archived(options={})
         find(:all, options.update(:from => :archived))
       end
-      
+
       def active(options={})
         find(:all, options)
       end
     end
   end
-  
+
   class Base < ActiveResource::Base
     class << self
-      
+
       def inherited(base)
         unless base == Mite::SingletonBase
           Mite.resources << base
@@ -120,7 +123,7 @@ module Mite
         end
         super
       end
-      
+
       # Common shortcuts known from ActiveRecord
       def all(options={})
         find(:all, options)
@@ -134,17 +137,17 @@ module Mite
         find_every(options).last
       end
     end
-  
+
     private
-    
+
     def query_string2(options)
       options.is_a?(String) ? "?#{options}" : super
     end
   end
-  
+
   class SingletonBase < Base
     include ResourceWithoutWriteAccess
-    
+
     class << self
       def collection_name
         element_name
@@ -155,16 +158,16 @@ module Mite
         "#{prefix(prefix_options)}#{collection_name}.#{format.extension}#{query_string(query_options)}"
       end
 
-      def collection_path(prefix_options = {}, query_options = nil) 
-        prefix_options, query_options = split_options(prefix_options) if query_options.nil? 
-        "#{prefix(prefix_options)}#{collection_name}.#{format.extension}#{query_string(query_options)}" 
+      def collection_path(prefix_options = {}, query_options = nil)
+        prefix_options, query_options = split_options(prefix_options) if query_options.nil?
+        "#{prefix(prefix_options)}#{collection_name}.#{format.extension}#{query_string(query_options)}"
       end
     end
-    
+
     def find
       super(1)
     end
-    
+
     alias_method :first, :find
     alias_method :last, :find
 
@@ -173,8 +176,15 @@ module Mite
       raise MethodNotAvaible, "Method not supported on #{self.class.name}"
     end
   end
-  
+
 end
 
-$:.unshift(File.dirname(__FILE__))
-Dir[File.join(File.dirname(__FILE__), "mite/*.rb")].each { |f| require f }
+require 'mite/account'
+require 'mite/customer'
+require 'mite/myself'
+require 'mite/project'
+require 'mite/service'
+require 'mite/time_entry'
+require 'mite/time_entry_group'
+require 'mite/tracker'
+require 'mite/user'
