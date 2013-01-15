@@ -24,7 +24,7 @@ en:
   connection_verified: "<strong>Status:</strong> Connection active (Updated at <small>%{date}</small>)"
   connection_unverified: "<strong>Status:</strong> Not connected"
   header_omit_transmission_option: "Add option in time entry form to not send the current time entry to <em>mite</em>"
-  header_tracker_option: "Activate tracker functionality, if time entries are booked without effort"
+  header_tracker_option: "Activate tracker functionality, if time entries are booked without effort (e.g. <em>0h0m</em> or <em>0</em>)"
   header_preferences: "Preferences"
   header_note_pattern: "Additional infos for a time entry note"
   help_note_pattern: "You can define additional information sent with each time entry within the comments. For dynamic information you can use the following placeholders:<br />{issue_id}, {issue}, {issue_tracker}, {issue_category}, {project_id}, {project}, {user_id}, {user}</code>."
@@ -41,7 +41,7 @@ en:
   label_login: "Login"
   label_binding_active: "Interconnection active"
   label_api_key: "API key"
-  label_assignment_mite_customer: "<em>mite</em>.customer <small>(filter for list <em>mite</em>.project)</small>"
+  label_assignment_mite_customer: "<em>mite</em>.customer <small>(filter for following list <em>mite</em>.project)</small>"
   label_assignment_mite_project: "<em>mite</em>.project"
   label_assignment_mite_services: "<em>mite</em>.services"
 

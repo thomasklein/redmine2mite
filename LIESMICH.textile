@@ -20,7 +20,7 @@ Die folgenden Installationsanweisungen müssen über die Kommandozeile ausgefüh
 # Navigiere in das Redmine Plugin-Verzeichnis: <code>$ cd /path/to/redmine/plugins</code> 
 # Klone den Plugin-Quellcode von Github: <code>$ git clone http://github.com/thomasklein/redmine2mite</code>
 # Navigiere zum Redmine Stammverzeichnis: <code>$ cd /path/to/redmine/</code>
-# Installiere das Plugin-Schema durch das Ausführen von <code>rake db:migrate_plugins</code>
+# Installiere das Plugin-Schema durch das Ausführen von <code>rake redmine:plugins:migrate</code>
 # Starte deinen Redmine Webserver neu (z.B. Mongrel, Thin, WEBrick) 
 # Voilá!
 

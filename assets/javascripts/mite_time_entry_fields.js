@@ -7,8 +7,8 @@ var MITE_APP = MITE_APP || {};
   MITE_APP.timeEntryFields = (function() {
     
     var _$checkboxSendToMite, _$fsBookEffort, _$mite_resources_wrapper, _$mite_resources, 
-        _$time_entry_mite_project_id, _$time_entry_mite_service_id, _$timeLogFormElementContainer, 
-        _$messageRunningTracker, _editFormHasTimeLogFields,
+        _$time_entry_mite_project_id, _$time_entry_mite_service_id, _domTimeLogFormElementContainer, 
+        _domMessageRunningTracker, _editFormHasTimeLogFields,
     
     _initVars = function() {
       var oNode;
@@ -25,15 +25,15 @@ var MITE_APP = MITE_APP || {};
       else {
         _editFormHasTimeLogFields = false;
       }
-      _$mite_resources_wrapper = $('mite_resources_wrapper');
-      _$mite_resources = $("mite_resources");
+      _$mite_resources_wrapper = $(doc.getElementById("mite_resources_wrapper"));
+      _$mite_resources = $(doc.getElementById("mite_resources"));
       _$time_entry_mite_project_id = $(doc.getElementById("time_entry_mite_project_id"));
       _$time_entry_mite_service_id = $(doc.getElementById("time_entry_mite_service_id"));
       
       oNode = document.createElement("div");
       oNode.id = "plugin_mite_hidden_time_log_form_elements";
       oNode.style.display = "none";
-      _$timeLogFormElementContainer = oNode;
+      _domTimeLogFormElementContainer = oNode;
 
       oNode = document.createElement("p");
       oNode.id = "";
@@ -41,7 +41,7 @@ var MITE_APP = MITE_APP || {};
       oNode.innerHTML = 
         "Currently the mite time tracker is running on this ticket. " +
         "If you want to log a new time entry you have to stop it first: ";
-      _$messageRunningTracker = oNode;
+      _domMessageRunningTracker = oNode;
     },
     
     _addResourcesWrapperToEditForm = function() {
@@ -83,23 +83,23 @@ var MITE_APP = MITE_APP || {};
     _initTimeLogForm = function(show) {
       _$fsBookEffort.children().each(function(el, index){
         if (index > 0) {
-          $(_$timeLogFormElementContainer).append($(el));
+          $(_domTimeLogFormElementContainer).append($(el));
         }
       });
       
-      $(_$messageRunningTracker).append(MITE_APP.tracker.$stopTrackerLink);
-      _$fsBookEffort.append(_$messageRunningTracker);
-      _$fsBookEffort.append(_$timeLogFormElementContainer);
+      $(_domMessageRunningTracker).append(MITE_APP.tracker.$stopTrackerLink);
+      _$fsBookEffort.append(_domMessageRunningTracker);
+      _$fsBookEffort.append(_domTimeLogFormElementContainer);
     },
     
     _toggleTimeLogForm = function(show) {
       if (show) {
-        _$timeLogFormElementContainer.style.display = "block";
-        _$messageRunningTracker.style.display = "none";
+        _domTimeLogFormElementContainer.style.display = "block";
+        _domMessageRunningTracker.style.display = "none";
       }
       else {
-        _$timeLogFormElementContainer.style.display = "none";
-        _$messageRunningTracker.style.display = "block";
+        _domTimeLogFormElementContainer.style.display = "none";
+        _domMessageRunningTracker.style.display = "block";
       }
       _toggleMiteResourceFields(show);
     },

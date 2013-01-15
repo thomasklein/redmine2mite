@@ -8,7 +8,7 @@ module MiteHelper
   # - select box to a mite project
   # - select box to a mite service
   #
-  def self.mite_rsrcs_assignment_container(time_entry, display_initially = true)
+  def self.mite_rsrcs_assignment_container(project_id, display_initially = true, mite_project_id = 0, mite_service_id = 0)
     display = ""
     display = style='display:none' if display_initially
     new_fields = "<div id='mite_resources_wrapper' #{display}>"
@@ -24,10 +24,10 @@ module MiteHelper
         :time_entry,
         :mite_project_id,
         MiteProject,
-        time_entry.project_id,
+        project_id,
         :include_blank => I18n.translate(:none1_option_select_box), 
         :has_at_most_one_binding => true,
-        :selected_mite_resource => time_entry.mite_project_id) + 
+        :selected_mite_resource => mite_project_id) + 
       "</p>"
     new_fields += 
       "<p><label for='time_entry_mite_service_id'>#{I18n.translate(:label_mite_service).html_safe}</label>" + 
@@ -35,10 +35,10 @@ module MiteHelper
         :time_entry,
         :mite_service_id,
         MiteService,
-        time_entry.project_id,
+        project_id,
         :include_blank => I18n.translate(:none2_option_select_box),
         :optgroup_separator => I18n.translate(:label_option_group_other_services),
-        :selected_mite_resource => time_entry.mite_service_id) + 
+        :selected_mite_resource => mite_service_id) + 
       "</p>"
     new_fields += "</div><!-- mite_resources -->"
     new_fields += "</div><!-- mite_resources_wrapper -->"

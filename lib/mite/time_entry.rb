@@ -37,8 +37,8 @@ class Mite::TimeEntry < Mite::Base
     Mite::Tracker.stop if tracking?
   end
 
-  def load(attr, foo = false) # + ", foo = false" - addition in order to make the Redmine2mite-Plugin work
-    super(attr)
+  def load(*attrs)
+    super
     if attributes["tracking"]
       attributes["tracker"] = Mite::Tracker.new.load(attributes.delete("tracking").attributes)
     end

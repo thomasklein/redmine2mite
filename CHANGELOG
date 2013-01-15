@@ -1,3 +1,13 @@
+== Redmine2mite v2.0.1
+* Several bugfixes
+* Updated mite-rb to v0.5.1
+
+== Redmine2mite v2.0
+* Adds support for Redmine 2.x.
+* Based on Rails 3.2. and Ruby 1.9
+* JS code refactoring - now based on jQuery instead of Prototype
+* Updated mite-rb to v0.5.0
+
 == Redmine2mite v1.6
 * Refactoring of many code parts
 * Added the possibility to stop the tracker from within the edit issue form
