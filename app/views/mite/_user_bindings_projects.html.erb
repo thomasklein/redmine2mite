@@ -5,7 +5,7 @@
 	fieldset_class = ""
 	cb_checked = 'checked = "checked"'
 	sb_htmlOptionsProjects = {:class => "mite_project_select"}
-	sb_htmlOptionsServices = {:size => @user_mite_services.size, :multiple => "multiple"}
+	sb_htmlOptionsServices = {:size => @user_mite_services.size, :multiple => "multiple", :class => "mite_services_select"}
 # if the current project binding is inactive, mark it as such
 	if firstBinding && firstBinding[:mite_rsrc_id] == -1
 		fieldset_class = "plugin_mite_inactive"
@@ -19,7 +19,7 @@
 		  <input type='checkbox' class='project_connection' <%= cb_checked %> id="project_connection_<%= user_project.id %>" title="<%= l('title_activate_deactivate_interconnection') %>" /><label title="<%= l('title_activate_deactivate_interconnection') %>" for="project_connection_<%= user_project.id %>">&nbsp;<%= user_project.name %></label>
 		</legend>
 		<input type='hidden' name='bindings[<%= user_project.id %>][]' value="0" />
-    <%= raw simple_select_with_label(l(:label_assignment_mite_customer).html_safe, "bindings[#{user_project.id}][]", @user_mite_customers, @bindings_per_project[user_project.id], {:prompt => l('none1_option_select_box')}, {:class => "customer_filter"}) %>
+    <%= raw simple_select_with_label(l(:label_assignment_mite_customer).html_safe, "bindings[#{user_project.id}][]", @user_mite_customers, @bindings_per_project[user_project.id], {:prompt => l('none1_option_select_box')}, {:class => "mite_customer_filter", :style => "width:450px;"}) %>
 		<%= raw simple_select_with_label(l(:label_assignment_mite_project).html_safe, "bindings[#{user_project.id}][]", @user_mite_projects, @bindings_per_project[user_project.id], {:prompt => l('none1_option_select_box')}, sb_htmlOptionsProjects) %>
 		<%= raw simple_select_with_label(l(:label_assignment_mite_services).html_safe, "bindings[#{user_project.id}][]", @user_mite_services, @bindings_per_project[user_project.id], {}, sb_htmlOptionsServices) %>
 	</fieldset>

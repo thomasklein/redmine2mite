@@ -1,5 +1,23 @@
-a#plugin_mite_tracker_active {
-	background: url('../images/clock_animated.gif') transparent no-repeat;
+@charset 'UTF-8';
+
+.mite-icon-tracker-not-running {
+  background: url('../../../images/time.png') transparent no-repeat;
+}
+
+#plugin_mite_tracker_running, .mite-icon-tracker-running {
+  background: url('../images/clock_animated.gif') transparent no-repeat;
+}
+
+.mite-icon-tracker-running, .mite-icon-tracker-not-running {
+  margin-left: 5px;
+}
+
+.mite-icon-tracker-running {
+  color: #ff8215 !important;
+  font-weight: bold;
+}
+
+#plugin_mite_tracker_running {
 	width: 16px;
 	height: 16px;
 	margin-right: -10px;
@@ -7,7 +25,24 @@ a#plugin_mite_tracker_active {
 	display: block;
 }
 
-a#plugin_mite_tracker_time {
+#plugin_mite_tracker_time {
 	color: #ff8215 !important;
 	margin-left: -4px;
+}
+
+#plugin_mite_running_tracker_infobox{
+  color: #ff8215;
+}
+
+#plugin_mite_start_tracker_dialog {
+  overflow: visible;
+  z-index: 1010;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal {
+  overflow: visible;
 }

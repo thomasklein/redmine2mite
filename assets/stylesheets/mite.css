@@ -1,3 +1,4 @@
+@charset 'UTF-8';
 /* @group Plugin config */
 
 #plugin_mite_config {
@@ -9,9 +10,9 @@
 }
 
 #plugin_mite_config label {
-	display: block;
 	font-weight: bold;
 	margin: 0.7em 0 0.25em 0;
+	display: block;
 }
 
 #plugin_mite_config h2 {
@@ -19,11 +20,11 @@
 	background: #8BBBE5;
 	color: white;
 	padding: 0.25em;
-	margin: 0;
+	margin-bottom: 0.5em;
 }
 
 #plugin_mite_config fieldset {
-	margin-top: 20px;
+	margin: 20px 0 10px 0;
 	padding-top: 10px;	
 }
 
@@ -104,10 +105,15 @@ input.plugin_mite_api_key {
 	margin-right: 14em;
 }
 
-p.plugin_mite_preferences_help {
+.plugin_mite_preferences_help {
 	color: #888888;
 	line-height: 150%;
 	margin: 0 0 0.5em 0;
+	clear: both;
+}
+
+.plugin_mite_preferences_option_checkbox + label {
+	display: inline !important;
 }
 
 input.plugin_mite_note_pattern {

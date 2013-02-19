@@ -68,20 +68,41 @@ module MiteControllerHelper
     params[:disconnect_account_data] || params[:mite_account_data_button_pressed] == 'disconnect_account_data'
   end
   
-  def save_tracked_time
-    te = TimeEntry.find(params["te"])
-    hours = Float(params["time"])
-    # do only consider a tracked time greater than 0
-    if hours > 0
-      te[:hours] = hours / 60
-      te.save
+  def delete_mite_time_entry(mte)
+    mte.destroy
+  end
+
+  def update_time_entry_with_tracker_data(te, tracker_data)
+    hours = Float(tracker_data["time"])
+    te[:hours] = hours / 60
+    te[:comments] = tracker_data["comments"]
+    te[:activity_id] = tracker_data["activity_id"].to_i
+    if tracker_data["mite_time_entry_was_disconnected"] == "true"
+      # setting :mite_time_entry_updated_on to -1 is used in the 
+      # before_update hook in time_entry_patch.rb
+      # to delete the mite_time_entry which was attached to the time entry 
+      te[:mite_time_entry_updated_on] = -1
+    else
+      te[:mite_project_id] = tracker_data["mite_project_id"].to_i
+      te[:mite_service_id] = tracker_data["mite_service_id"].to_i
     end
+    te.save
     User.current.preference.mite_tracker_data = {:active => false}
     User.current.preference.save
   end
   
+  def mite_tracker_stopped(tracker_data)
+    te = TimeEntry.find(tracker_data["te_id"].to_i)
+    mte = Mite::TimeEntry.find(tracker_data["mite_te_id"].to_i)
+    update_time_entry_with_tracker_data(te, tracker_data)
+  end
+  
   def nullify_user_preferences_fields
-    User.current.preference.update_attributes(:mite_account_name => nil,:mite_api_key => nil, :mite_note_pattern => nil, :mite_connection_updated_on => nil)
+    User.current.preference.update_attributes(:mite_account_name => nil,
+                                              :mite_api_key => nil,
+                                              :mite_note_pattern => nil,
+                                              :mite_synchronize_services => nil,
+                                              :mite_connection_updated_on => nil)
   end
   
   def nullify_time_entry_fields
@@ -161,7 +182,10 @@ module MiteControllerHelper
   
   def create_new_bindings_by_project(project_id, mite_rsrc_ids)
     mite_rsrc_ids.each do |mite_rsrc_id|
-      MiteBinding.create(:project_id => project_id, :user_id => User.current.id, :mite_rsrc_id => mite_rsrc_id) unless MiteBinding.find(:first,:conditions => {:user_id => User.current.id, :mite_rsrc_id => mite_rsrc_id, :project_id => project_id})
+      MiteBinding.create(
+        :project_id => project_id,
+        :user_id => User.current.id,
+        :mite_rsrc_id => mite_rsrc_id) unless MiteBinding.find(:first,:conditions => {:user_id => User.current.id, :mite_rsrc_id => mite_rsrc_id, :project_id => project_id})
     end
   end
   

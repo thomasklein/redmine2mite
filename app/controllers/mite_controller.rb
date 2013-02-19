@@ -1,6 +1,6 @@
 class MiteController < ApplicationController
   unloadable
-  REDMINE_2_MITE_VERSION = 'v1.6'
+  REDMINE_2_MITE_VERSION = 'v2.1'
   require 'mite-rb'
   require 'mite_synchronizer'
   include MiteControllerHelper
@@ -56,21 +56,48 @@ class MiteController < ApplicationController
     end
     redirect_to :action => "index"
   end
-  
-  # called by an Ajax-Request
+
+  # called by an Ajax-Request in tracker.js
+  def start_tracker
+    time_entry_data = request.parameters
+    begin
+      time_entry = TimeEntry.new(
+          :project => Project.find(time_entry_data[:project_id].to_i),
+          :issue => Issue.find(time_entry_data[:issue_id].to_i),
+          :user => User.current,
+          :spent_on => User.current.today)
+
+      time_entry.safe_attributes = time_entry_data
+      if time_entry.save
+        render :json => time_entry
+      else
+        raise "Saving a new Time Entry was not possible."
+      end
+    rescue StandardError => exception
+      p "Mite Time Tracker could not be started for an unforeseen reason."
+      p exception
+      render :text => "Error: " + exception.to_s
+    end
+  end
+
+  # called by an Ajax-Request in tracker.js
   def stop_tracker
-    params = request.parameters
+    tracker_data = request.parameters
+    tracker_response = {:status => ""}
     begin
       validate_mite_account_data(User.current.preference)
       mtracker = Mite::Tracker.current
-      if mtracker.stop
-        save_tracked_time
-        render :text => "Success"
+      if !mtracker # the mite tracker was not running
+        tracker_response[:status] = "WasNotRunning"
+      elsif mtracker.stop
+        mite_tracker_stopped(tracker_data)
+        tracker_response[:status] = "Stopped"
       else
-        raise "Tracker was stopped for an unforeseen reason."
+        raise "Tracker was not stopped for an unforeseen reason."
       end
+      render :json => tracker_response
     rescue StandardError => exception
-      p "Tracker was stopped for an unforeseen reason."
+      p "Tracker was not stopped for an unforeseen reason."
       p exception
       render :text => "Error: " + exception.to_s
     end

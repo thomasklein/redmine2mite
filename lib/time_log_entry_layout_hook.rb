@@ -7,7 +7,6 @@ class TimeLogEntryLayoutHook < Redmine::Hook::ViewListener
     return if !firstBinding || firstBinding[:mite_rsrc_id] < 0
     te = context[:time_entry]
     new_fields = MiteHelper::mite_rsrcs_assignment_container(te.project_id, true, te.mite_project_id, te.mite_service_id)
-    new_fields += javascript_include_tag('mite_time_entry_fields', :plugin => 'redmine2mite', :cache => false)
     new_fields
   end
 end

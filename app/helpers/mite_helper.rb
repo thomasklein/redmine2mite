@@ -9,14 +9,12 @@ module MiteHelper
   # - select box to a mite service
   #
   def self.mite_rsrcs_assignment_container(project_id, display_initially = true, mite_project_id = 0, mite_service_id = 0)
-    display = ""
-    display = style='display:none' if display_initially
-    new_fields = "<div id='mite_resources_wrapper' #{display}>"
-    if User.current.preference.mite_omit_transmission_option
-      new_fields += 
+    className = ""
+    className = "class='hidden'" unless display_initially
+    new_fields = "<div id='mite_resources_wrapper' #{className}>"
+    new_fields += 
         "<p><label for='time_entry_option_send_te_to_mite'>#{I18n.translate(:label_option_send_te_to_mite).html_safe}</label>" +
         "<input type='checkbox' id='option_send_te_to_mite' value='1' checked='checked' /></p>"
-    end
     new_fields += 
       "<div id='mite_resources'>" +
       "<p><label for='time_entry_mite_project_id'>#{I18n.translate(:label_mite_project).html_safe}</label>" + 

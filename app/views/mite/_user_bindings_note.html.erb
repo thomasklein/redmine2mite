@@ -1,7 +1,9 @@
-<label for="user_preferences_mite_omit_transmission_option"><%= l(:header_omit_transmission_option).html_safe %></label>
-<%= check_box(:user_preferences, "mite_omit_transmission_option") %>
+<%= check_box(:user_preferences, "mite_tracker_option", { :class => "plugin_mite_preferences_option_checkbox"} ) %>
 <label for="user_preferences_mite_tracker_option"><%= l(:header_tracker_option).html_safe %></label>
-<%= check_box(:user_preferences, "mite_tracker_option") %>
+<p class="plugin_mite_preferences_help"><%= l(:help_tracker_option).html_safe %></p>
+<%= check_box(:user_preferences, "mite_synchronize_services", { :class => "plugin_mite_preferences_option_checkbox"} ) %>
+<label for="user_preferences_mite_synchronize_services"><%= l(:header_synchronize_services).html_safe %></label>
+<p class="plugin_mite_preferences_help"><%= l(:help_synchronize_services).html_safe %></p>
 <label for="user_preferences_mite_note_pattern"><%= l(:header_note_pattern).html_safe %></label>
 <p class="plugin_mite_preferences_help"><%= l(:help_note_pattern).html_safe %></p>
 <%= text_field :user_preferences, :mite_note_pattern, :class => "plugin_mite_note_pattern" %>

@@ -5,7 +5,7 @@ class IssueDetailsLayoutHook < Redmine::Hook::ViewListener
       return unless issue.id
       
       new_fields = MiteHelper::mite_rsrcs_assignment_container(issue.project_id, false)
-      new_fields += javascript_include_tag('mite_time_entry_fields', :plugin => 'redmine2mite', :cache => false)
+      new_fields += "<input type='hidden' id='plugin_mite_message_running_tracker' value='" + l("msg_running_tracker_on_this_issue") + "' />"
       new_fields
   end
 end
