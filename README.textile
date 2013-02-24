@@ -1,8 +1,8 @@
 "_mite_":http://mite.yo.lk/en is a sleek time tracking tool for teams and freelancers.
 
-<code>Redmine2mite</code> connects your Redmine account with your _mite_.account. Track your time easily on issues within Redmine and get them automatically send to _mite_.
+<code>Redmine2mite</code> connects your Redmine account with your _mite_.account. Track your time easily on issues within Redmine and get them automatically send to _mite_. Projects from Redmine can be bundled with _mite_.projects. You can specify which _mite_.services should be available in Redmine on a per-project basis. 
 
-Projects from Redmine can be bundled with _mite_.projects. Furthermore, you can specify which _mite_.services should be available in Redmine on a per-project basis.
+A real time saver is the included time tracker (has to be activated in the plugin's settings). As you are used to it from _mite_, you can start a tracker on an issue and let it run until you are finished and then easily stop it. No more guessing, stay accurate :)!
 
 h2. Requirements
 
@@ -23,6 +23,10 @@ The following commands are intended to be executed on the command line.
 # Install the plugin schema by calling <code>rake redmine:plugins:migrate</code>
 # Restart your Redmine web server (e.g. Mongrel, Thin, WEBrick) 
 # Voilá!
+
+h2. Available translation files
+
+English and German.
 
 h2. Setup
 
@@ -50,11 +54,15 @@ First of all, you have to activate this feature in the Redmine2mite preferences 
 
 h4. Starting it
 
-From now on, if you book leave the value for the amount of time empty or "0h0m" (as it is set automatically) and save a new time entry in Redmine, the tracker is started is Redmine and in _mite_ simultaneously. You can see its status in the title bar of the current window and right beside the Redmine2mite preferences link.
+From now on, if you book leave the value for the amount of time empty or "0h0m" (as it is set automatically) and save a new time entry in Redmine *or* click the "Start time tracker" link in an issue, the tracker is started is Redmine and in _mite_ simultaneously. You can see its status in the title bar of the current window and right beside the Redmine2mite preferences link.
 
 h4. Stopping it
 
-Click on the orange timer right beside the Redmine2mite preferences link. It links to the list of time entries of the associated ticket. Beside the active time entry is a rotating clock. Click on it to stop the time tracker and save the current time both to Redmine and to mite.
+To get to the issue that has the active tracker attached to it, just click on the orange timer on top right beside the Redmine2mite preferences link. Instead of the "Start time tracker" link, you should now see a "Stop running tracker" link. Click on it and it directs you to the form part of the time entry. When you submit the form, the time tracker is stopped.
+
+h4. Can two or more time tracker run simultaneously?
+
+Nope.
 
 h2. Known issues
 
@@ -64,7 +72,7 @@ Well, currently "there is no easy way doing this":http://www.redmine.org/boards/
 * remove the directory <code>redmine2mite</code> out of the <code>/plugins</code> directory. 
 * manually delete all of the plugins database tables and newly added fields to existing tables
 ** tables: <code>mite_bindings</code>, <code>mite_rsrcs</code>
-** added fields in table <code>user_preferences</code>: <code>mite_account_name</code>, <code>mite_api_key</code>, <code>mite_note_pattern</code>, <code>mite_connection_updated_on</code>, <code>mite_tracker_option</code>, <code>mite_tracker_data</code>
+** added fields in table <code>user_preferences</code>: <code>mite_account_name</code>, <code>mite_api_key</code>, <code>mite_note_pattern</code>, <code>mite_connection_updated_on</code>, <code>mite_tracker_option</code>, <code>mite_tracker_data</code>, <code>mite_synchronize_services</code>
 ** added fields in table <code>time_entries</code>: <code>mite_time_entry_id</code>, <code>mite_project_id</code>, <code>mite_service_id</code>, <code>mite_time_entry_updated_on</code>
 * all entries "redmine_mite" in table <code>schema_migrations</code>
 

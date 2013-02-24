@@ -1,7 +1,6 @@
 @charset 'UTF-8';
-/* @group Plugin config */
 
-#plugin_mite_config {
+.plugin_mite_config {
 	width:500px;
 	margin: 1em auto;
 	border: 1px solid #aaa;
@@ -9,13 +8,13 @@
 	background:#F6F6F6;
 }
 
-#plugin_mite_config label {
+.plugin_mite_config label {
 	font-weight: bold;
 	margin: 0.7em 0 0.25em 0;
 	display: block;
 }
 
-#plugin_mite_config h2 {
+.plugin_mite_config h2 {
 	font-size: 12pt;
 	background: #8BBBE5;
 	color: white;
@@ -23,21 +22,21 @@
 	margin-bottom: 0.5em;
 }
 
-#plugin_mite_config fieldset {
+.plugin_mite_config fieldset {
 	margin: 20px 0 10px 0;
 	padding-top: 10px;	
 }
 
-#plugin_mite_config fieldset legend {
+.plugin_mite_config fieldset legend {
 	font-size: 15px;
 	font-weight: bold;
 }
 
-#plugin_mite_config fieldset legend label {
-	display: inline !important;
+.plugin_mite_config fieldset legend label {
+	display: inline;
 }
 
-fieldset.plugin_mite_inactive {
+.plugin_mite_inactive {
 	color: #999999;
 }
 
@@ -92,11 +91,11 @@ div.plugin_mite_connection_status_msg small {
 	clear: both;
 }
 
-input.plugin_mite_account_name {
+.plugin_mite_account_name {
 	width: 135px;
 }
 
-input.plugin_mite_api_key {
+.plugin_mite_api_key {
 	width: 255px;
 }
 
@@ -113,18 +112,18 @@ input.plugin_mite_api_key {
 }
 
 .plugin_mite_preferences_option_checkbox + label {
-	display: inline !important;
+	display: inline-block;
 }
 
-input.plugin_mite_note_pattern {
+.plugin_mite_note_pattern {
 	width: 95%;
 }
 
-#plugin_mite_config .readonly {
+.plugin_mite_config .readonly {
 	color: #666;
 }
 
-div.plugin_mite_loading_notifier {
+.plugin_mite_loading_notifier {
 	background: url(../images/indicator.gif) no-repeat left center;
 	margin: 0 auto;
 	padding-left: 12px;
@@ -138,25 +137,17 @@ div.plugin_mite_loading_notifier {
 	visibility: hidden;
 }
 
-.plugin_mite_displayInline {
-	display: inline !important;
-}
-
-label.plugin_mite_displayInline {
-	padding-top: 2px;
-}
-
 /* @end */
 
 /* @group Fancy links */
 
-a#plugin_mite_link_change_value, a#plugin_mite_link_change_value:active {
+#plugin_mite_link_change_value, #plugin_mite_link_change_value:active {
 	color: #5e7edb;
 	padding: 0.25em;
 	text-decoration: none;
 }
 
-a#plugin_mite_link_change_value:hover {
+#plugin_mite_link_change_value:hover {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	text-shadow: 0 1px 1px #E6D0C9;
@@ -184,7 +175,6 @@ a#plugin_mite_link_change_value:hover {
 .plugin_mite_hide_if_no_javascript {
 	display: none;
 }
-
 
 /* @end */
 

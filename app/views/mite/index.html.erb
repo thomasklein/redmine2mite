@@ -1,23 +1,25 @@
 <% content_for :header_tags do %>
-	<%= stylesheet_link_tag 'mite', :plugin => 'redmine2mite', :cache => true %>
+	<%= stylesheet_link_tag 'mite_preferences', :plugin => 'redmine2mite', :cache => true %>
 <% end %>
 <% html_title(l(:plugin_user_preferences_title)) -%>
-<div id="plugin_mite_config">
+<div class="plugin_mite_config">
 <h2><%= l(:header_plugin_preferences).html_safe %></h2>
 <%= form_for @user_preferences, :as => 'mite', :url => { :action => 'process_account_form' } do |f| %>
+
 <%  # ACTIVE connection
 	if @last_updated %>
 		<%= render :partial => "connection_active", :locals => {:f => f, :last_updated => @last_updated} %>
+
 <% # INACTIVE connection 
 	else %>
 		<%= render :partial => "connection_inactive", :locals => {:f => f} %>
 <% 	end %>
+
 	<div class="formularButtons">
 		<div class="buttonsRight">
 			<%= submit_tag l('check_account_data'), :name => "check_account_data", :id => 'check_account_data' %>
 		</div>
 		<div class="buttonsLeft">
-			
 			<% if User.current.preference[:mite_connection_updated_on] %>
 				<%= submit_tag l('disconnect_account_data'), :name => 'disconnect_account_data', :id => 'disconnect_account_data' %>
 				<p class="plugin_mite_hidden" id="msg_confirm_disconnecting_account"><%= l(:msg_confirm_disconnecting_account) %></p>
@@ -26,7 +28,6 @@
 		</div>
 		<div class="plugin_mite_loading_notifier" id="mite_plugin_notifier_account_data">.</div>
 		<input type='hidden' id='mite_account_data_button_pressed' name="mite_account_data_button_pressed" />
-		
 		<div class="clearBoth"></div>
 	</div>
 <% end %>

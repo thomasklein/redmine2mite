@@ -1,12 +1,10 @@
-/*global define */
 (function (win, doc, undefined) {
   define(function () {
     "use strict";
-
     var _path = win.location.pathname.slice(1), // quit the first char which is a "/"
         _urlParts = {},
         _currentPage,
-        _miteTrackerActive = doc.getElementById("plugin_mite_tracker") !== undefined,
+        _miteTrackerActive = doc.getElementById("plugin_mite_tracker_data") !== null,
         _PAGES = {
           MITE_PREFERENCES       : "mite_preferences",
           VIEW_ISSUE             : "view_issue",
@@ -30,7 +28,8 @@
           TRACKER_START_LINK_CLICK_WAS_PROCESSED : "mite_tracker:start_link_clicked_was_processed",
           MITE_RESOURCE_FIELDS_SHOULD_TOGGLE     : "mite_resource_fields:should_toggle",
           MITE_RESOURCE_FIELDS_TOGGLED           : "mite_resource_fields:toggled",
-          CUSTOMER_FILTER_CHANGED                : "mite_preferences:customer_filter_changed"
+          SELECTBOX_SHOULD_BE_IMPROVED           : "mite:selectbox_should_be_improved",
+          IMPROVED_SELECTBOX_UPDATED             : "mite:improved_selectbox_updated"
         },
         _URLS = {
           START_TRACKER : "/mite/start_tracker",
@@ -70,11 +69,15 @@
             _currentPage = _PAGES.TIME_ENTRIES_ON_ISSUE;
           }
           else if (_path.indexOf("time_entries") !== -1) { _currentPage = _PAGES.TIME_ENTRY; }
-          else if (_path.indexOf("issues") !== -1) { _currentPage = _PAGES.VIEW_ISSUE; }
+          else if (_path.indexOf("issues") !== -1 && _path.indexOf("projects") === -1) { _currentPage = _PAGES.VIEW_ISSUE; }
         },
 
         _removeClass = function(domElement, className) {
            domElement.className = domElement.className.replace(new RegExp(className,"g"),"");
+        },
+
+        _hasClass = function(domElement, className) {
+          return domElement.className.match(new RegExp('(\\s|^)'+ className +'(\\s|$)'));
         };
 
     _setUrlParts();
@@ -87,6 +90,7 @@
       URLS              : _URLS,
       currentPage       : _currentPage,
       removeClass       : _removeClass,
+      hasClass          : _hasClass,
       urlParts          : _urlParts,
       miteTrackerActive : _miteTrackerActive
     };

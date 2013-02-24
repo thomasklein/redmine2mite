@@ -1,13 +1,10 @@
-/*global showAndScrollTo */
 (function (win, doc, $, undefined) {
-  define(["helper"], function(helper) {
+  define(["helper"], function(_h) {
     "use strict";
-
     var _domIconLogTime, _domTimeEntryHours, _domMessageRunningTrackerInfobox,
         _domFormEditIssue, _domRedmineActivity, _domPreStopTrackerLink,
         _domTimeEntryComments, _domRedmineActivityLabel, _miteTimeEntryWasDisconnected,
         _msgMissingActivity,
-        _h = helper,
         _onTrackerStopped = function() {}, // defined at runtime
         _onTrackerStarted = function() {}, // defined at runtime
 

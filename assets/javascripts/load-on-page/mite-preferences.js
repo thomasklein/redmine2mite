@@ -1,28 +1,22 @@
-/*global jQuery,define */
 (function (win, doc, $, undefined) {
-  define(["helper"], function (helper) {
+  define(["helper"], function (_h) {
     "use strict";
-
     var _$link_change_value, _$button_check_account_data, _$button_disconnect_account_data,
         _$field_api_key_inactive, _$notifier_account_data, _$account_data_button_pressed,
         _$button_save_bindings, _$notifier_preferences, _$project_connections,
         _domMsg_confirm_disconnecting_account,
         _customer_to_mite_project_bindings, _mite_projects, _customer_filter_by_select_box,
-        _account_is_activated = false,
-        _h = helper,
+        _isAccountActivated,
     
-    _initVars = function() {
-      _$link_change_value = $(doc.getElementById('plugin_mite_link_change_value'));
-      _$button_check_account_data = $(doc.getElementById('check_account_data'));
-      _$button_disconnect_account_data = $(doc.getElementById('disconnect_account_data'));
-      _$notifier_account_data = $(doc.getElementById('mite_plugin_notifier_account_data'));
-      _$account_data_button_pressed = $(doc.getElementById('mite_account_data_button_pressed'));
-      _account_is_activated = (_$button_disconnect_account_data.length);
+    _improveSelectboxes = function() {
+      $(doc).trigger(_h.EVENTS.SELECTBOX_SHOULD_BE_IMPROVED, [$(".mite_customer_filter")]);
+      $(doc).trigger(_h.EVENTS.SELECTBOX_SHOULD_BE_IMPROVED, [$(".mite_project_select")]);
+      $(doc).trigger(_h.EVENTS.SELECTBOX_SHOULD_BE_IMPROVED, [$(".mite_services_select")]);
     },
 
     _populateMiteProjectSelectBox = function(mite_project_select_box, options) {
       mite_project_select_box.innerHTML = options;
-      $(doc).trigger(_h.EVENTS.CUSTOMER_FILTER_CHANGED, [mite_project_select_box]);
+      $(doc).trigger(_h.EVENTS.IMPROVED_SELECTBOX_UPDATED, [mite_project_select_box]);
     },
     
     _emptyMiteProjectSelectBox = function(mite_project_select_box) {
@@ -92,7 +86,7 @@
     
     _onClickCheckAccountDataButton = function() {
       _$button_check_account_data.attr('disabled','disabled').css("cursor", 'wait');
-      if (_account_is_activated) {
+      if (_isAccountActivated) {
         _$button_disconnect_account_data.attr('disabled','disabled').css("cursor", 'wait');
       }
       _$notifier_account_data.css("display", 'block');
@@ -189,13 +183,23 @@
       });
     },
 
+    _initVars = function() {
+      _$link_change_value = $(doc.getElementById('plugin_mite_link_change_value'));
+      _$button_check_account_data = $(doc.getElementById('check_account_data'));
+      _$button_disconnect_account_data = $(doc.getElementById('disconnect_account_data'));
+      _$notifier_account_data = $(doc.getElementById('mite_plugin_notifier_account_data'));
+      _$account_data_button_pressed = $(doc.getElementById('mite_account_data_button_pressed'));
+      _isAccountActivated = (_$button_disconnect_account_data.length);
+    },
+
     _init = function() {
       _initVars();
       _initEventHandlers();
-      if (_account_is_activated) {
+      if (_isAccountActivated) {
         _initVarsForActivatedAccount();
         _initElementsForActivatedAccount();
         _initEventHandlersForActivatedAccount();
+        _improveSelectboxes();
       }
     };
 

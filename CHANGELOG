@@ -1,3 +1,12 @@
+== Redmine2mite v2.1
+* New feature: The time tracker can now be started and stopped directly from the header of an issue. it is much more convenient than having to create a new time entry with now logged time
+* New feature: Option to synchronize the selection of a mite.services with a redmine activity and vice versa
+* Removed the option to "Not send a time entry to mite" - the checkbox to choose this is now always available
+* Included the "chosen" http://harvesthq.github.com/chosen/ plugin for all select boxes related to the plugin; now it is much easier to handle select boxes with a huge amount of entries
+* Backend changes:
+** included require-js to handle the javascript file loading
+** refactored major part of the javascript code
+
 == Redmine2mite v2.0.1
 * Several bugfixes
 * Updated mite-rb to v0.5.1

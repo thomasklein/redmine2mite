@@ -34,7 +34,7 @@ en:
   header_note_pattern: "Additional infos for a time entry note"
   help_note_pattern: "You can define additional information sent with each time entry within the comments. For dynamic information you can use the following placeholders:<br />{issue_id}, {issue}, {issue_tracker}, {issue_category}, {project_id}, {project}, {user_id}, {user}</code>."
   header_interconnections: "Interconnections"
-  help_interconnections: "Selected <em>mite</em>.projects / <em>mite</em>.services will be shown on top of the selection lists for a new time entry. You can choose multiple services by clicking with a pressed control key (Windows) or command key (Mac) on several entries in the lists. If you don't want to interconnect certain projects to <em>mite</em> you can also deactivate the interconnection.<br /><br /> Quicklinks to your Redmine projects"
+  help_interconnections: "Selected <em>mite</em>.projects / <em>mite</em>.services will be shown on top of the selection lists for a new time entry. You can choose multiple services by clicking several times in the input field. If you don't want to interconnect certain projects to <em>mite</em> you can also deactivate the interconnection.<br /><br /> Quicklinks to your Redmine projects"
   plugin_user_preferences_title: "Redmine2mite user settings"
   title_activate_deactivate_interconnection: "Activate/Deactivate project interconnection"
 

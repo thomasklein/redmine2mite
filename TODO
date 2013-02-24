@@ -1,3 +1,8 @@
-- in /app/controllers/mite_controller.rb: find a cheap way to check for each time entry made in Redmine if it still exists in mite
-- in /app/helpers/mite_helper.rb: TODO: improve readability of code
-- /lib/time_entry_patch.rb: implement observer to get logic out of model
+- rails code refactoring
+	- in /app/controllers/mite_controller.rb: find a cheap way to check for each time entry made in Redmine if it still exists in mite
+	- in /app/helpers/mite_helper.rb: TODO: improve readability of code
+	- /lib/time_entry_patch.rb: implement observer to get logic out of model
+- JS code refactoring
+	- write tests!
+	- minimize jquery dependency (with-time-entry-fields.js, mite-preferences.js)
+	- add some minimal framework for event handling and an improved modular architecture. something similar to hydra.js (https://github.com/tcorral/Hydra.js) or tinycore (https://github.com/mawrkus/tinycore)

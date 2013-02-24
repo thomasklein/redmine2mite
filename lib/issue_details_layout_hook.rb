@@ -1,6 +1,8 @@
 class IssueDetailsLayoutHook < Redmine::Hook::ViewListener
   
   def view_issues_form_details_bottom(context = {})
+      return unless MiteHelper::user_is_logged_in_and_mite_plugin_is_setup?
+      
       issue = context[:issue]
       return unless issue.id
       

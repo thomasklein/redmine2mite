@@ -93,4 +93,8 @@ module MiteHelper
     tag_options = html_options.map { |key, value| %(#{key}="#{value}") }.join(" ")
     "<label>#{label}</label><select name='#{name}' #{tag_options}>#{options_html}</select>"
   end
+
+  def self.user_is_logged_in_and_mite_plugin_is_setup?
+    return User.current.preference && User.current.preference[:mite_connection_updated_on]
+  end
 end

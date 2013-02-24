@@ -34,7 +34,7 @@ de:
   header_tracker_option: "Time Tracker - Funktion aktivieren"
   help_tracker_option: "Der Time Tracker kann entweder über den <em>Starte Time Tracker</em>-Link in einem Ticket gestartet werden, oder wenn ein Zeiteintrag ohne Aufwand gebucht wird (z.B. <em>0h0m</em> oder <em>0</em>)."
   header_interconnections: "Bindungen"
-  help_interconnections: "Ausgewählte <em>mite</em>.projekte / <em>mite</em>.leistungen werden an den Anfang der Auswahllisten für einen neuen Zeiteintrag gestellt. Du kannst auch mehrere Leistungen auswählen, indem du beim Klicken die Strg-Taste (Windows) bzw. Apfel-Tast (Mac) gedrückt hältst. Wenn du bestimmte Projekte nicht an <em>mite</em> binden möchtest, dann kannst du die Bindung auch deaktivieren. <br /><br />Sprungmarken zu deinen Redmine-Projekten:"
+  help_interconnections: "Ausgewählte <em>mite</em>.projekte / <em>mite</em>.leistungen werden an den Anfang der Auswahllisten für einen neuen Zeiteintrag gestellt. Du kannst auch mehrere Leistungen auswählen indem mehrmals in das Eingabefeld klickst. Wenn du bestimmte Projekte nicht an <em>mite</em> binden möchtest, dann kannst du die Bindung auch deaktivieren. <br /><br />Sprungmarken zu deinen Redmine-Projekten:"
   plugin_user_preferences_title: "Redmine2mite Nutzereinstellungen"
   title_activate_deactivate_interconnection: "Aktiviere oder deaktiviere die Projektbindung"
 

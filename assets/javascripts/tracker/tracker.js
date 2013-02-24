@@ -1,8 +1,6 @@
-/*global define, console */
 (function (win, doc, $, undefined) {
   define(["helper"], function (helper) {
     "use strict";
-      
     var _domTitle, _domStopTrackerLink, _domTopNavBarTimer, _domStartTrackerLink, _domMitePrefLink,
         _trackerData, _running, _titleDefault, _timerUpdateTime, _timerRef,
         _msgStopTracker, _labelStartTimeTracker, _labelStopTimeTracker,
@@ -29,7 +27,7 @@
       _domStartTrackerLink = doc.createElement("a");
       _domStartTrackerLink.href = "#";
       _domStartTrackerLink.innerHTML = _labelStartTimeTracker;
-      tracker_data_temp = $(doc.getElementById("plugin_mite_tracker")).val();
+      tracker_data_temp = $(doc.getElementById("plugin_mite_tracker_data")).val();
       if (tracker_data_temp && tracker_data_temp !== 'null' && tracker_data_temp !== "{}") {
         _setTrackerData($.parseJSON(tracker_data_temp));
       }
