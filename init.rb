@@ -27,7 +27,7 @@ Redmine::Plugin.register :redmine2mite do
     Track your time easily on issues within Redmine and get them automatically send to mite.
     '''
   url         'https://github.com/thomasklein/redmine2mite'
-  version     '2.0.1'
+  version     '2.1.1'
   
   requires_redmine :version_or_higher => '2.0'
   menu  :account_menu, :mite, { :controller => 'mite', :action => 'index' }, 
