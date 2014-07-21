@@ -1,3 +1,6 @@
+== Redmine2mite v2.11
+* Bugfix: There was an error when a user wanted to log time directly on a project and any placeholder related to an issue was set in the settings
+
 == Redmine2mite v2.1
 * New feature: The time tracker can now be started and stopped directly from the header of an issue. it is much more convenient than having to create a new time entry with now logged time
 * New feature: Option to synchronize the selection of a mite.services with a redmine activity and vice versa

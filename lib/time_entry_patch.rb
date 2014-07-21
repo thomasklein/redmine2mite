@@ -140,16 +140,29 @@ module TimeEntryPatch
       # (marked by "{" and "}") and is part of the comment
       return comment if comment.include?("{") && comment.include?("}")
       
-      new_comment = pattern
-      new_comment['{issue_id}']= self.issue_id.to_s if new_comment['{issue_id}']
-      new_comment['{issue}']= self.issue.subject if new_comment['{issue}']
-      new_comment['{issue_tracker}']= self.issue.tracker.name if new_comment['{issue_tracker}']
-      new_comment['{issue_category}']= self.issue.category ? self.issue.category.name : "" if new_comment['{issue_category}']
-      new_comment['{project_id}']= self.project_id.to_s if new_comment['{project_id}']
-      new_comment['{project}']= self.project.name if new_comment['{project}']
-      new_comment['{user_id}']= self.user_id.to_s if new_comment['{user_id}']
-      new_comment['{user}']= "#{self.user.firstname} #{self.user.lastname}" if new_comment['{user}']
+      resolved_pattern = pattern
       
-      "#{comment} {#{new_comment}}"
+      if self.issue
+        resolved_pattern['{issue_id}']= self.issue_id.to_s if resolved_pattern['{issue_id}']
+        resolved_pattern['{issue}']= self.issue.subject if resolved_pattern['{issue}']
+        resolved_pattern['{issue_tracker}']= self.issue.tracker.name if resolved_pattern['{issue_tracker}']
+        resolved_pattern['{issue_category}']= self.issue.category ? self.issue.category.name : "" if resolved_pattern['{issue_category}']
+      # in case the user attaches a time to a project, remove the placeholders
+      else
+        resolved_pattern['{issue_id}']= "" if resolved_pattern['{issue_id}']
+        resolved_pattern['{issue}']= "" if resolved_pattern['{issue}']
+        resolved_pattern['{issue_tracker}']= "" if resolved_pattern['{issue_tracker}']
+        resolved_pattern['{issue_category}']= "" if resolved_pattern['{issue_category}']
+      end
+      resolved_pattern['{project_id}']= self.project_id.to_s if resolved_pattern['{project_id}']
+      resolved_pattern['{project}']= self.project.name if resolved_pattern['{project}']
+      resolved_pattern['{user_id}']= self.user_id.to_s if resolved_pattern['{user_id}']
+      resolved_pattern['{user}']= "#{self.user.firstname} #{self.user.lastname}" if resolved_pattern['{user}']
+      
+      if resolved_pattern.delete(" ") != ""
+        comment += " {#{resolved_pattern}}"
+      end  
+
+      comment
     end
   end
